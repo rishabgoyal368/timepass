@@ -17,6 +17,10 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('home','Admin\AdminController@index');
+Route::get('manage-users','Admin\UsersController@index');
+Route::get('add-user','Admin\UsersController@add');
+
 Route::get('/login', function () {
     return view('login');
 });
