@@ -17,6 +17,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+Route::get('/category','Admin\CategoryManagement@index');
+Route::match(['get','post'],'/category/add','Admin\CategoryManagement@add');
+Route::match(['get','post'],'/category/edit/{id}','Admin\CategoryManagement@edit');
+Route::match(['get','post'],'/category/delete/{id}','Admin\CategoryManagement@delete');
+
 Route::get('home','Admin\AdminController@index');
 Route::get('manage-users','Admin\UsersController@index');
 Route::any('add-user','Admin\UsersController@add');
