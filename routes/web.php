@@ -19,7 +19,8 @@ Route::get('/', function () {
 
 Route::get('home','Admin\AdminController@index');
 Route::get('manage-users','Admin\UsersController@index');
-Route::get('add-user','Admin\UsersController@add');
+Route::any('add-user','Admin\UsersController@add');
+Route::any('edit-user/{id}','Admin\UsersController@add');
 
 Route::get('/login', function () {
     return view('login');

@@ -16,7 +16,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password',
+        'first_name', 'last_name', 'email', 'email_verified_at', 'mobile_number', 'profile_image', 'password','status'
     ];
 
     /**
@@ -36,4 +36,21 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public static function addEdit($data)
+    {
+        return User::updateOrCreate(
+            ['id' => @$data['id']],
+            [
+                'first_name' => @$data['first_name'],
+                'last_name' => @$data['last_name'],
+                'email' => @$data['email'],
+                // 'email_verified_at' => @$data['email_verified_at'],
+                'mobile_number' => @$data['mobile_number'],
+                // 'profile_image' => @$data['profile_image'],
+                'password' => @$data['password'],
+                'status' => @$data['status']
+            ]
+        );
+    }
 }

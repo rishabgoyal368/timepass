@@ -22,9 +22,11 @@
     <link rel='stylesheet' href="{{asset('assets/css/vendor-addon.css')}}" />
 
     <link href="https://fonts.googleapis.com/css?family=Hind+Vadodara:400,500,600" rel="stylesheet">
-    <link rel='stylesheet' href="{{asset('assets/css/jost.css')}}" />
+    <link rel='stylesheet' href="https://d33wubrfki0l68.cloudfront.net/css/04cc97dcdd1c8f6e5b9420845f0fac26b54dab84/default/assets/fonts/jost/jost.css" />
     <!--Material Icons-->
-    <link rel='stylesheet' href="{{asset('assets/css/materialdesignicons.min')}}" />
+    <link rel='stylesheet' type='text/css'
+        href='https://d33wubrfki0l68.cloudfront.net/css/548117a22d5d22545a0ab2dddf8940a2e32c04ed/default/assets/fonts/materialdesignicons/materialdesignicons.min.css' />
+    <!-- <link rel='stylesheet' href="{{asset('assets/css/materialdesignicons.min')}}" /> -->
     <link rel='stylesheet' href="{{asset('assets/css/admin.css')}}" />
     <link rel='stylesheet' href="{{asset('assets/css/theme-default.min.css')}}" />
     <link rel='stylesheet' href="{{asset('assets/css/datatable.css')}}" />
@@ -146,6 +148,7 @@
                 </div>
             </div>
         </div>
+        @include('Admin.Layout.flash-message')
         @yield('content')
 
     </main>
