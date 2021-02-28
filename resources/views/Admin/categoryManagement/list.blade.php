@@ -18,7 +18,7 @@
                     </h4>
                 </div>
                 <div class="col-2 text-white p-t-40 p-b-90">
-                    <a href="{{url('/category/add/')}}" class="add_record">Add {{@$label}}</a>
+                    <a href="{{url('admin/category/add/')}}" class="add_record">Add {{@$label}}</a>
                 </div>
             </div>
         </div>
@@ -35,7 +35,7 @@
                                 <thead>
                                     <tr>
                                         <th>Title</th>
-                                        <th>Type</th>
+                                        <!-- <th>Type</th> -->
                                         <th>Action</th>
                                     </tr>
                                 </thead>
@@ -44,29 +44,21 @@
                                         @foreach($category_list as $value)
                                             <tr>
                                                 <td>{{ ucfirst($value['title']) }}</td>
-                                                <?php
-                                                    if($value['type'] == 'videos'){
-                                                        $type = 'Videos';
-                                                    }else{
-                                                        $type = 'Web Series';
-                                                    }
-                                                ?>
-                                                <td>{{ $type }}</td>
                                                 <td>
-                                                    <a href="{{ url('/category/edit/'.$value['id']) }}" title="Edit"><i class="fa fa-edit"></i></a>
-                                                    <a href="{{ url('/category/delete/'.$value['id']) }}" class="delete-alert" title="Delete"><i class="fa fa-trash"></i></a>
+                                                    <a href="{{ url('admin/category/edit/'.$value['id']) }}" title="Edit"><i class="fa fa-edit"></i></a>
+                                                    <a href="{{ url('admin/category/delete/'.$value['id']) }}" class="delete-alert" title="Delete"><i class="fa fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach
                                     @endif
                                 </tbody>
-                              <!--   <tfoot>
+                                <tfoot>
                                     <tr>
                                         <th>Title</th>
-                                        <th>Type</th>
+                                        <!-- <th>Type</th> -->
                                         <th>Action</th>
                                     </tr>
-                                </tfoot> -->
+                                </tfoot>
                             </table>
                         </div>
                     </div>

@@ -18,7 +18,7 @@
 <meta property="og:image"
       content="https://cdn.dribbble.com/users/180706/screenshots/5424805/the_sceens_-_mobile_perspective_mockup_3_-_by_tranmautritam.jpg"/>
 <meta property="og:site_name" content="atlas "/>
-<title>Login</title>
+<title>Change Password</title>
 <link rel="icon" type="image/x-icon" href="{{ asset('/assets/img/logo.png') }}"/>
 <link rel="icon" href="{{ asset('/assets/img/logo.png') }}" type="image/png" sizes="16x16">
 <link rel='stylesheet' href='https://d33wubrfki0l68.cloudfront.net/css/478ccdc1892151837f9e7163badb055b8a1833a5/light/assets/vendor/pace/pace.css'/>
@@ -69,29 +69,30 @@
                                 atmos
                             </p>
                         </div>
-                        <h3 class="text-center p-b-20 fw-400">Login</h3>
-                        <form class="needs-validation" method="post" id="login_form">
+                        <h3 class="text-center p-b-20 fw-400">Change Password</h3>
+                        <form class="needs-validation" method="post" id="set_password">
                             <div class="form-row">
                                 <div class="form-group floating-label col-md-12">
                                     <label>Email</label>
-                                    <input type="email" name="email" class="form-control" value="" placeholder="Email">
+                                    <input type="email" name="email" class="form-control" value="{{ $email }}" placeholder="Email" disabled>
                                 </div>
                                 <div class="form-group floating-label col-md-12">
                                     <label>Password</label>
-                                    <input type="password" name="password" class="form-control" value="" placeholder="Password">
+                                    <input type="password" name="new_pw" id="new_pw" class="form-control" value="" placeholder="Password">
                                 </div>
-                            <button type="submit" class="btn btn-primary btn-block btn-lg">Login</button>
+                                <div class="form-group floating-label col-md-12">
+                                    <label>Confirm Password</label>
+                                    <input type="password" name="confirm_pw" class="form-control" value="" placeholder="Confirm Password">
+                                </div>
+                            <button type="submit" class="btn btn-primary btn-block btn-lg">submit</button>
                             </div>
                             @csrf
                         </form>
-                        <p class="text-right p-t-10">
-                            <a href="{{ url('/forgot-password') }}" class="text-underline">Forgot Password?</a>
-                        </p>
                     </div>
 
                 </div>
             </div>
-            <div class="col-lg-8 d-none d-md-block bg-cover" style="background-image: url('assets/img/login.svg');">
+            <div class="col-lg-8 d-none d-md-block bg-cover" style="background-image: {{ asset('assets/img/login.svg') }} ;">
 
             </div>
         </div>
@@ -127,7 +128,7 @@
 
                         <div class="list-group-item d-flex  align-items-center">
                             <div class="m-r-20">
-                                <div class="avatar avatar-sm "><img class="avatar-img rounded-circle"   src="assets/img/users/user-3.jpg" alt="user-image"></div>
+                                <div class="avatar avatar-sm "><img class="avatar-img rounded-circle"   src="{{ asset('assets/img/users/user-3.jpg') }}" alt="user-image"></div>
                             </div>
                             <div class="">
                                 <div class="name">Eric Chen</div>
@@ -139,7 +140,7 @@
                         <div class="list-group-item d-flex  align-items-center">
                             <div class="m-r-20">
                                 <div class="avatar avatar-sm "><img class="avatar-img rounded-circle"
-                                                                    src="assets/img/users/user-4.jpg" alt="user-image"></div>
+                                                                     src="{{ asset('assets/img/users/user-4.jpg') }}"  alt="user-image"></div>
                             </div>
                             <div class="">
                                 <div class="name">Sean Valdez</div>
@@ -151,7 +152,7 @@
                         <div class="list-group-item d-flex  align-items-center">
                             <div class="m-r-20">
                                 <div class="avatar avatar-sm "><img class="avatar-img rounded-circle"
-                                                                    src="assets/img/users/user-8.jpg" alt="user-image"></div>
+                                                                     src="{{ asset('assets/img/users/user-8.jpg') }}" alt="user-image"></div>
                             </div>
                             <div class="">
                                 <div class="name">Marie Arnold</div>
@@ -230,20 +231,26 @@
 </div>
 
 
-<script type="text/javascript">
-   
-
-        $('#login_form').validate({
-            rules:{
-                email:{
-                    required:true,
-                },
-                password:{
-                    required: true,
-                },
-            },
-          });
-</script>
+   <script>
+       $("#set_password").validate({
+           rules:{
+               new_pw:{
+                   required: true,
+                   minlength:8,
+               },
+               confirm_pw:{
+                   required  : true,
+                   minlength :8,
+                   equalTo   : "#new_pw",
+               },
+           },
+           messages:{
+               confirm_pw:{
+                   equalTo:"Confirm password is not same. Please enter again"
+               }
+           },
+       })
+   </script>
 <script src='https://d33wubrfki0l68.cloudfront.net/bundles/85bd871e04eb889b6141c1aba0fedfa1a2215991.js'></script>
 <!--page specific scripts for demo-->
 

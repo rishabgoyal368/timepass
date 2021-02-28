@@ -1,10 +1,10 @@
 <?php 
     if(isset($category_details)){
         $title = 'Edit';
-        $action = url('category/edit/'.$category_details['id']); 
+        $action = url('admin/category/edit/'.$category_details['id']); 
     }else{
         $title = 'Add';
-        $action = url('category/add'); 
+        $action = url('admin/category/add'); 
     }
 ?>
 @extends('Admin.Layout.app')
@@ -45,16 +45,6 @@
                                 <div class="form-group col-md-6">
                                     <label for="inputEmail4">Title</label>
                                     <input type="text" class="form-control" name="title" value="{{ @$category_details['title'] }}" placeholder="Title">
-                                </div>
-                            </div>
-                            <div class="form-row">
-                                <div class="form-group col-md-6">
-                                    <label for="inputEmail4">Type</label>
-                                    <select name="type" class="form-control">
-                                        <option disabled selected>Select Type</option>
-                                        <option value="web_series" <?php if(@$category_details['type'] == 'web_series'){ echo "selected";} ?> >Web Series</option>
-                                        <option value="videos"  <?php if(@$category_details['type'] == 'videos'){ echo "selected";} ?> >Videos</option>
-                                    </select>
                                 </div>
                             </div>
                             @csrf

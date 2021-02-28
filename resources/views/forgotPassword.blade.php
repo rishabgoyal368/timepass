@@ -18,7 +18,7 @@
 <meta property="og:image"
       content="https://cdn.dribbble.com/users/180706/screenshots/5424805/the_sceens_-_mobile_perspective_mockup_3_-_by_tranmautritam.jpg"/>
 <meta property="og:site_name" content="atlas "/>
-<title>Login</title>
+<title>Forgot Password</title>
 <link rel="icon" type="image/x-icon" href="{{ asset('/assets/img/logo.png') }}"/>
 <link rel="icon" href="{{ asset('/assets/img/logo.png') }}" type="image/png" sizes="16x16">
 <link rel='stylesheet' href='https://d33wubrfki0l68.cloudfront.net/css/478ccdc1892151837f9e7163badb055b8a1833a5/light/assets/vendor/pace/pace.css'/>
@@ -36,21 +36,18 @@
 <link rel='stylesheet' type='text/css' href='https://d33wubrfki0l68.cloudfront.net/css/548117a22d5d22545a0ab2dddf8940a2e32c04ed/default/assets/fonts/materialdesignicons/materialdesignicons.min.css'/>
 <!--Bootstrap + atmos Admin CSS-->
 <link rel='stylesheet' type='text/css' href='https://d33wubrfki0l68.cloudfront.net/css/ed18bd005cf8b05f329fad0688d122e0515499ff/default/assets/css/atmos.min.css'/>
-
 <!-- Additional library for page -->
+
 </head>
+<link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet"/>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
 <style type="text/css">
     .error{
         color: red;
     }
 </style>
-<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-
-<link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet"/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
-
 <body class="jumbo-page">
     @include('common.notification')
     
@@ -69,23 +66,19 @@
                                 atmos
                             </p>
                         </div>
-                        <h3 class="text-center p-b-20 fw-400">Login</h3>
-                        <form class="needs-validation" method="post" id="login_form">
+                        <h3 class="text-center p-b-20 fw-400">Forgot Password</h3>
+                        <form class="needs-validation" method="post" id="forgotPassword">
                             <div class="form-row">
                                 <div class="form-group floating-label col-md-12">
                                     <label>Email</label>
-                                    <input type="email" name="email" class="form-control" value="" placeholder="Email">
+                                    <input type="email" name="email"  class="form-control" placeholder="Email">
                                 </div>
-                                <div class="form-group floating-label col-md-12">
-                                    <label>Password</label>
-                                    <input type="password" name="password" class="form-control" value="" placeholder="Password">
-                                </div>
-                            <button type="submit" class="btn btn-primary btn-block btn-lg">Login</button>
                             </div>
                             @csrf
+                            <button type="submit" class="btn btn-primary btn-block btn-lg">Submit</button>
                         </form>
                         <p class="text-right p-t-10">
-                            <a href="{{ url('/forgot-password') }}" class="text-underline">Forgot Password?</a>
+                            <a href="{{ url('/') }}" class="text-underline">Sign In?</a>
                         </p>
                     </div>
 
@@ -229,20 +222,16 @@
     </div>
 </div>
 
-
 <script type="text/javascript">
-   
 
-        $('#login_form').validate({
-            rules:{
-                email:{
-                    required:true,
-                },
-                password:{
-                    required: true,
-                },
+    $('#forgotPassword').validate({
+        rules:{
+            email:{
+                required:true,
+                email:true,
             },
-          });
+        },
+    });
 </script>
 <script src='https://d33wubrfki0l68.cloudfront.net/bundles/85bd871e04eb889b6141c1aba0fedfa1a2215991.js'></script>
 <!--page specific scripts for demo-->

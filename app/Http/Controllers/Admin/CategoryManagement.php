@@ -23,11 +23,11 @@ class CategoryManagement extends Controller
             $data                   = $request->all();
             $add_category           = new Category;
             $add_category->title    = $data['title'];
-            $add_category->type     = $data['type'];
+            // $add_category->type     = $data['type'];
             if($add_category->save()){
-                return redirect('/category')->with('success','Category added successfully');
+                return redirect('admin/category')->with('success','Category added successfully');
             }else{
-                return redirect('/category')->with('error','Something went wrong, Please try again later.');
+                return redirect('admin/category')->with('error','Something went wrong, Please try again later.');
             }
         }
     	$label = $this->label;
@@ -39,11 +39,11 @@ class CategoryManagement extends Controller
             $data                   = $request->all();
             $edit_category           = Category::find($id);
             $edit_category->title    = $data['title'];
-            $edit_category->type     = $data['type'];
+            // $edit_category->type     = $data['type'];
             if($edit_category->save()){
-                return redirect('/category')->with('success','Category edited successfully');
+                return redirect()->back()->with('success','Category edited successfully');
             }else{
-                return redirect('/category')->with('error','Something went wrong, Please try again later.');
+                return redirect('admin/category')->with('error','Something went wrong, Please try again later.');
             }
         }
         $category_details = Category::where('id',$id)->first();
@@ -56,7 +56,7 @@ class CategoryManagement extends Controller
         if($delete){
             return redirect()->back()->with('success','Category deleted successfully');
         }else{
-            return redirect('/category')->with('error','Something went wrong, Please try again later.');
+            return redirect('admin/category')->with('error','Something went wrong, Please try again later.');
         }
     }
 

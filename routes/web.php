@@ -13,20 +13,30 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::match(['get','post'],'/','AuthController@login');
+Route::match(['get','post'],'/admin/login','AuthController@login');
+Route::match(['get','post'],'/forgot-password','AuthController@forgot_password');
+Route::match(['get','post'],'/set-password/{security_code}/{user_id}','AuthController@set_password');
+Route::match(['get','post'],'/logout','AuthController@logout');
 
-Route::get('/category','Admin\CategoryManagement@index');
-Route::match(['get','post'],'/category/add','Admin\CategoryManagement@add');
-Route::match(['get','post'],'/category/edit/{id}','Admin\CategoryManagement@edit');
-Route::match(['get','post'],'/category/delete/{id}','Admin\CategoryManagement@delete');
+Route::group(['prefix'=>'admin','middleware'=>'CheckAdminAuth'],function()
+{
+	//------Dahboard---------------------------------------------------------------------------
+	Route::get('/home','Admin\AdminController@index');
 
-Route::get('home','Admin\AdminController@index');
-Route::get('manage-users','Admin\UsersController@index');
-Route::any('add-user','Admin\UsersController@add');
-Route::any('edit-user/{id}','Admin\UsersController@add');
+	//------Dahboard---------------------------------------------------------------------------
 
-Route::get('/login', function () {
-    return view('login');
+
+	//------Manage User ---------------------------------------------------------------------------
+	Route::get('/manage-users','Admin\UsersController@index');
+	Route::get('/add-user','Admin\UsersController@add');
+	//------Manage User ---------------------------------------------------------------------------
+
+	//------Category Management  ---------------------------------------------------------------------------
+	Route::get('/category','Admin\CategoryManagement@index');
+	Route::match(['get','post'],'/category/add','Admin\CategoryManagement@add');
+	Route::match(['get','post'],'/category/edit/{id}','Admin\CategoryManagement@edit');
+	Route::match(['get','post'],'/category/delete/{id}','Admin\CategoryManagement@delete');
+	//------Category Management  ---------------------------------------------------------------------------
+
 });

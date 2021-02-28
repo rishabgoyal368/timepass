@@ -16,7 +16,7 @@ class CreateCategoriesTable extends Migration
         Schema::create('categories', function (Blueprint $table) {
             $table->id();
             $table->string('title');
-            $table->enum('type', ['web_series','videos']);
+            // $table->enum('type', ['web_series','videos']);
             $table->timestamps();
         });
     }
