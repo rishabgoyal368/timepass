@@ -114,10 +114,11 @@
                             </div>
                         </a>
                         <div class="dropdown-menu  dropdown-menu-right">
-                            <a class="dropdown-item" href="#"> Add Account
+                            <!-- <a class="dropdown-item" href="{{ url('/reset-password') }}"> Add Account -->
                             </a>
-                            <a class="dropdown-item" href="#"> Reset Password</a>
-                            <a class="dropdown-item" href="#"> Help </a>
+
+                            <a class="dropdown-item" href="{{ url('admin/my-profile') }}"> My Profile </a>
+                            <a class="dropdown-item" href="{{ url('admin/reset-password') }}"> Reset Password</a>
                             <div class="dropdown-divider"></div>
                             <a class="dropdown-item" href="{{ url('logout') }}"> Logout</a>
                         </div>
