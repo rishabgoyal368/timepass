@@ -29,7 +29,9 @@ Route::group(['prefix'=>'admin','middleware'=>'CheckAdminAuth'],function()
 
 	//------Manage User ---------------------------------------------------------------------------
 	Route::get('/manage-users','Admin\UsersController@index');
-	Route::get('/add-user','Admin\UsersController@add');
+	Route::any('/add-user','Admin\UsersController@add');
+	Route::any('edit-user/{id}','Admin\UsersController@add');
+
 	//------Manage User ---------------------------------------------------------------------------
 
 	//------Category Management  ---------------------------------------------------------------------------
