@@ -1,16 +1,7 @@
 @extends('Admin.Layout.app')
 @section('title','Reset Password')
 @section('content')
-<link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet"/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
- @include('common.notification')
-<style type="text/css">
-    .error{
-        color: red;
-    }
-</style>
+
 <section class="admin-content">
     <div class="bg-dark">
         <div class="container  m-b-30">

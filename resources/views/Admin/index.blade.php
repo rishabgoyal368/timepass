@@ -1,7 +1,6 @@
 @extends('Admin.Layout.app')
+@section('title', 'Dashboard')
 @section('content')
-
-<!--site header ends -->
 <section class="admin-content">
     <div class="container-fluid bg-dark m-b-30">
         <div class="row">

@@ -2,7 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-
+use App\Http\Controllers\ApiController;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -14,4 +14,8 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/user-register','Api\UserController@user_registration');
+// Route::post('/register_data','Api\UserController@user_registration');
+
+Route::post('/register_data', 'ApiController@user_registration');
+
+Route::post('login', 'ApiController@user_login');

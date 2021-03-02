@@ -42,7 +42,7 @@ Route::group(['prefix'=>'admin','middleware'=>'CheckAdminAuth'],function()
     Route::match(['get','post'],'/reset-password','AuthController@reset_password');
     Route::match(['get','post'],'/my-profile','AuthController@my_profile');
 
-    define('AdminProfileBasePath', 'public/assets/img');
-    define('AdminProfileImgPath', asset('public/assets/img'));
+    // define('AdminProfileBasePath', 'public/assets/img');
+    // define('AdminProfileImgPath', asset('public/assets/img'));
 
 });
