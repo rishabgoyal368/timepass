@@ -46,7 +46,7 @@
                                                 <td>{{ ucfirst($value['title']) }}</td>
                                                 <td>
                                                     <a href="{{ url('admin/category/edit/'.$value['id']) }}" title="Edit"><i class="fa fa-edit"></i></a>
-                                                    <a href="{{ url('admin/category/delete/'.$value['id']) }}" class="delete-alert" title="Delete"><i class="fa fa-trash"></i></a>
+                                                    <a href="{{ url('admin/category/delete/'.$value['id']) }}" class="del_btn" title="Delete"><i class="fa fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -68,11 +68,11 @@
     </div>
 </section>
 <script type="text/javascript">
-    $('.delete-alert').on('click',function(){
-       if (confirm("Are you sure? You want delete it.")) {
-            
-        }
-        return false;
+$(document).ready(function(){
+    $(document).on("click",'.del_btn', function(){ 
+        return confirm("Do you want to delete it ?");
     });
+});    
 </script>
+
 @endsection

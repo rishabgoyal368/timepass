@@ -40,5 +40,11 @@ Route::group(['prefix'=>'admin','middleware'=>'CheckAdminAuth'],function()
 	Route::match(['get','post'],'/category/edit/{id}','Admin\CategoryManagement@edit');
 	Route::match(['get','post'],'/category/delete/{id}','Admin\CategoryManagement@delete');
 	//------Category Management  ---------------------------------------------------------------------------
+	
+    Route::match(['get','post'],'/reset-password','AuthController@reset_password');
+    Route::match(['get','post'],'/my-profile','AuthController@my_profile');
+
+    define('AdminProfileBasePath', 'public/assets/img');
+    define('AdminProfileImgPath', asset('public/assets/img'));
 
 });
