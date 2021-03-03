@@ -35,104 +35,35 @@
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
 </head>
 
+    
+
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
+    
+
+</head>
+
 <body class="sidebar-pinned page-home">
-    <aside class="admin-sidebar">
-        <div class="admin-sidebar-brand">
-            <!-- begin sidebar branding-->
-            <img class="admin-brand-logo" src="{{url('assets/img/logo.png')}}" width="40" alt="atmos Logo">
-            <span class="admin-brand-content font-secondary"><a href='{{url("/home")}}'> {{env('APP_NAME')}}</a></span>
-            <!-- end sidebar branding-->
-            <div class="ml-auto">
-                <!-- sidebar pin-->
-                <a href="#" class="admin-pin-sidebar btn-ghost btn btn-rounded-circle"></a>
-                <!-- sidebar close for mobile device-->
-                <a href="#" class="admin-close-sidebar"></a>
-            </div>
-        </div>
-        <div class="admin-sidebar-wrapper js-scrollbar">
-            @include('Admin.Layout.sidebar')
-        </div>
+    <link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
+     @include('common.notification')
+    <style type="text/css">
+        .error{
+            color: red;
+        }
+    </style>
 
-    </aside>
-    <main class="admin-main">
-        <!--site header begins-->
-        <header class="admin-header">
-
-            <a href="#" class="sidebar-toggle" data-toggleclass="sidebar-open" data-target="body"> </a>
-
-            <nav class=" ml-auto">
-                <ul class="nav align-items-center">
-                    
-                    <li class="nav-item dropdown ">
-                        <a class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <div class="avatar avatar-sm avatar-online">
-                                <span class="avatar-title rounded-circle bg-dark">V</span>
-
-                            </div>
-                        </a>
-                        <div class="dropdown-menu  dropdown-menu-right">
-                            <a class="dropdown-item" href="#"> Add Account
-                            </a>
-                            <a class="dropdown-item" href="#"> Reset Password</a>
-                            <a class="dropdown-item" href="#"> Help </a>
-                            <div class="dropdown-divider"></div>
-                            <a class="dropdown-item" href="{{ url('logout') }}"> Logout</a>
-                        </div>
-                    </li>
-
-                </ul>
-
-            </nav>
-        </header>
-        <!-- Modal -->
-        <div class="modal fade modal-slide-right" id="demoModal" tabindex="-1" role="dialog" aria-labelledby="demoLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="demoLabel">Demos</h5>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">
-                        <iframe src="https://atmos.atomui.com/demos.html" height="100%" width="100%" frameborder="0"></iframe>
-                    </div>
-                    <div class="modal-footer">
-                        <div class="text-muted"><i class="mdi mdi-information"></i>Demos will open in new tab</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @yield('content')
-
-    </main>
-
-
+    @include('Admin.layout.topheader1') 
+    @yield('content')
+    @include('Admin.layout.topheader2')
     
     <script src="{{asset('assets/js/vendors.js')}}"></script>
-
-    <!--page specific scripts for demo-->
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=UA-66116118-3"></script> -->
-    <!-- <script>
-        window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
-        gtag('js', new Date());
-        gtag('config', 'UA-66116118-3');
-    </script> -->
     <script src="{{asset('assets/js/apexcharts.min.js')}}"></script>
     <script src="{{asset('assets/js/dashboard-01.js')}}"></script>
     <script src="{{asset('assets/js/vendor.js')}}"></script>
     <script src="{{asset('assets/js/jquery.form-validator.min.js')}}"></script>
-
     <script src="{{asset('assets/js/custom.js')}}"></script>
     <script src="{{asset('assets/js/form-validation.js')}}"></script>
 </body>
-
-<!-- Mirrored from atmos.atomui.com/default/ by HTTrack Website Copier/3.x [XR&CO'2014], Mon, 08 Feb 2021 16:42:18 GMT -->
-
 </html>

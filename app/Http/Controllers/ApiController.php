@@ -16,8 +16,6 @@ use Mail,Hash,Auth;
 
 class ApiController extends Controller
 {
-
-
 	public function user_registration(Request $request)
 	   {        
     	$data = $request->all();
@@ -222,4 +220,15 @@ class ApiController extends Controller
             'expire_in'=>auth()->factory()->getTTL()*60
         ]);
     }
+
+	public function user_login(Request $request)
+	{
+		$admin_credentials = $request->only(['email','password']);
+		if(!$token = auth()->attempt($admin_credentials)){
+			return response()->json(['error','Incorrect email/password'],401);
+		}
+		
+		return response()->json(['token'=>$token]);;
+	}
+
 }

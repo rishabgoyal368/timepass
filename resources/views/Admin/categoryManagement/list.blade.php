@@ -1,12 +1,7 @@
 @extends('Admin.Layout.app')
-@section('title', 'Manage'.' '.$label.'s')
+@section('title', 'Category Management')
 @section('content')
-<link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 
-<link href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet"/>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.3/dist/jquery.validate.js"></script>
 <section class="admin-content">
     <div class="bg-dark">
         <div class="container  m-b-30">
@@ -46,7 +41,7 @@
                                                 <td>{{ ucfirst($value['title']) }}</td>
                                                 <td>
                                                     <a href="{{ url('admin/category/edit/'.$value['id']) }}" title="Edit"><i class="fa fa-edit"></i></a>
-                                                    <a href="{{ url('admin/category/delete/'.$value['id']) }}" class="delete-alert" title="Delete"><i class="fa fa-trash"></i></a>
+                                                    <a href="{{ url('admin/category/delete/'.$value['id']) }}" class="del_btn" title="Delete"><i class="fa fa-trash"></i></a>
                                                 </td>
                                             </tr>
                                         @endforeach
@@ -68,11 +63,11 @@
     </div>
 </section>
 <script type="text/javascript">
-    $('.delete-alert').on('click',function(){
-       if (confirm("Are you sure? You want delete it.")) {
-            
-        }
-        return false;
+$(document).ready(function(){
+    $(document).on("click",'.del_btn', function(){ 
+        return confirm("Do you want to delete it ?");
     });
+});    
 </script>
+
 @endsection
