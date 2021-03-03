@@ -13,6 +13,7 @@ class CategoryManagement extends Controller
         $this->label = 'Category';
     }
     public function index(){
+      
         $category_list = Category::get()->toArray();
     	$label = $this->label;
     	return view('Admin.categoryManagement.list',compact('label','category_list'));
