@@ -46,7 +46,9 @@
                                         <td>{{$user->mobile_number}}</td>
                                         <td>{{$user->status}}</td>
                                         <td>
-                                            <a href="{{url('/admin/edit-user')}}/{{$user->id}}">Edit</a>
+                                            <a href="{{ url('admin/edit-user/'.$user['id']) }}" title="Edit"><i class="fa fa-edit"></i></a>
+                                            <a href="{{ url('admin/delete-user/'.$user['id']) }}" class="del_btn" title="Delete"><i class="fa fa-trash"></i></a>
+
                                         </td>
                                         
                                     </tr>
