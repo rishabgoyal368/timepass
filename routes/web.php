@@ -31,6 +31,7 @@ Route::group(['prefix'=>'admin','middleware'=>'CheckAdminAuth'],function()
 	Route::get('/manage-users','Admin\UsersController@index');
 	Route::any('/add-user','Admin\UsersController@add');
 	Route::any('edit-user/{id}','Admin\UsersController@add');
+	Route::any('delete-user/{id}','Admin\UsersController@delete');
 
 	//------Manage User ---------------------------------------------------------------------------
 

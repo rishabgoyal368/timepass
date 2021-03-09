@@ -27,7 +27,7 @@ class UsersController extends Controller
 
     public function add(Request $request, $id = null)
     {
-        // try {
+        try {
             if ($request->isMethod('GET')) {
                 if ($id) {
                     $formLabel = 'Edit';
@@ -50,20 +50,31 @@ class UsersController extends Controller
                 if ($validator->fails()) {
                     return redirect()->back()->withInput()->withErrors($validator->errors());
                 }
-                $user = User::where('id',$request['id'])->first();
-                if ($request['id']) { 
-                    $data['password'] = $user['password'];                  
+                $user = User::where('id', $request['id'])->first();
+                if ($request['id']) {
+                    $data['password'] = $user['password'];
                     $msz =  'Updated';
                 } else {
+                    $data['password'] = Hash::make($request['password']);
                     $msz =  'Added';
                 }
                 $users =  User::addEdit($data);
                 $msz = $request['id'] ? 'Updated' : 'Added';
                 return redirect('admin/manage-users')->with(['success', 'User ' . $msz . ' Successfully']);
             }
-        // } catch (\Exception $e) {
-        //     return $e->getMessage();
-        //     return redirect()->back()->with(['error' => $e->getMessage()]);
-        // }
+        } catch (\Exception $e) {
+            return $e->getMessage();
+            return redirect()->back()->with(['error' => $e->getMessage()]);
+        }
+    }
+
+    public function delete($id)
+    {
+        $delete = User::where('id', $id)->delete();
+        if ($delete) {
+            return redirect()->back()->with('success', 'User deleted successfully');
+        } else {
+            return redirect('admin/category')->with('error', 'Something went wrong, Please try again later.');
+        }
     }
 }

@@ -31,11 +31,7 @@
     <link rel='stylesheet' href="{{asset('assets/css/theme-default.min.css')}}" />
     <link rel='stylesheet' href="{{asset('assets/css/datatable.css')}}" />
     <link rel="stylesheet" href="{{asset('assets/css/style.css')}}">
-
-
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous" />
-
-
+    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
 </head>
 
 <body class="sidebar-pinned page-home">
@@ -50,9 +46,7 @@
         }
     </style>
 
-
-
-    @include('Admin.Layout.topheader1')
+    @include('Admin.Layout.topheader1') 
     @yield('content')
     @include('Admin.Layout.topheader2')
 
