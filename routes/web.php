@@ -45,6 +45,17 @@ Route::group(['prefix'=>'admin','middleware'=>'CheckAdminAuth'],function()
     Route::match(['get','post'],'/reset-password','AuthController@reset_password');
     Route::match(['get','post'],'/my-profile','AuthController@my_profile');
 
+    //-----------------Actor-----------------------------
+
+    Route::match(['get','post'],'/member','Admin\ActorManagementController@index');
+    Route::match(['get','post'],'/member/add','Admin\ActorManagementController@add');
+    Route::match(['get','post'],'/member/edit/{id}','Admin\ActorManagementController@edit');
+    Route::match(['get','post'],'/member/delete/{id}','Admin\ActorManagementController@delete');
+
+    //-----------------Actor-----------------------------
+
+
+
     // define('AdminProfileBasePath', 'public/assets/img');
     // define('AdminProfileImgPath', asset('public/assets/img'));
 
