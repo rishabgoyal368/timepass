@@ -110,7 +110,7 @@ class ApiController extends Controller
         }
 
 
-        $check_email_exists->otp           =  rand(1111, 9999);
+        $check_email_exists->secret_key           =  rand(1111, 9999);
         if ($check_email_exists->save()) {
             $project_name = env('App_name');
             $email = $request['email'];

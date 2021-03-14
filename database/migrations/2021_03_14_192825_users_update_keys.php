@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class UpdateKeys extends Migration
+class UsersUpdateKeys extends Migration
 {
     /**
      * Run the migrations.
@@ -14,7 +14,7 @@ class UpdateKeys extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->timestamp('otp')->nullable();
+            $table->string('secret_key')->nullable();
         });
     }
 
