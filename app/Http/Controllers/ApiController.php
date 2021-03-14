@@ -116,7 +116,7 @@ class ApiController extends Controller
             $email = $request['email'];
             try {
                 if (!filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-                    Mail::send('emails.user_forgot_password_api', ['name' => ucfirst($check_email_exists['first_name']) . ' ' . $check_email_exists['last_name'], 'otp' => $check_email_exists['otp']], function ($message) use ($email, $project_name) {
+                    Mail::send('emails.user_forgot_password_api', ['name' => ucfirst($check_email_exists['first_name']) . ' ' . $check_email_exists['last_name'], 'otp' => $check_email_exists['secret_key']], function ($message) use ($email, $project_name) {
                         $message->to($email, $project_name)->subject('User Forgot Password');
                     });
                 }
@@ -134,7 +134,7 @@ class ApiController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'otp'       =>  'required|numeric',
+                'secret_key'       =>  'required|numeric',
                 'email'      => 'required|email',
                 'password'   => 'required',
                 'confirm_password' => 'required_with:password|same:password'
@@ -149,23 +149,23 @@ class ApiController extends Controller
 
         $email = $data['email'];
         $check_email = User::where('email', $email)->first();
-        if (empty($check_email['otp'])) {
+        if (empty($check_email['secret_key'])) {
             return response()->json(['error' => 'Something went wrong, Please try again later.']);
         }
         if (empty($check_email)) {
             return response()->json(['error' => 'This Email-id is not exists.']);
         } else {
-            if ($check_email['otp'] == $data['otp']) {
+            if ($check_email['secret_key'] == $data['secret_key']) {
                 $hash_password                  = Hash::make($data['password']);
                 $check_email->password          = str_replace("$2y$", "$2a$", $hash_password);
-                $check_email->otp               = null;
+                $check_email->secret_key               = null;
                 if ($check_email->save()) {
                     return response()->json(['success' => true, 'message' => 'Password changed successfully.']);
                 } else {
                     return response()->json(['error' => 'Something went wrong, Please try again later.']);
                 }
             } else {
-                return response()->json(['error' => 'OTP mismatch']);
+                return response()->json(['error' => 'secret_key mismatch']);
             }
         }
     }
