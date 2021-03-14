@@ -32,12 +32,12 @@ class ApiController extends Controller
 
         if ($validator->fails()) {
 
-            return response()->json(['error' => $validator->errors()], 401);
+            return response()->json(['error' => $validator->errors()], 200);
         }
 
         $check_email_exists = User::where('email', $data['email'])->first();
         if (!empty($check_email_exists)) {
-            return response()->json(['error' => 'This Email is already exists.'], 401);
+            return response()->json(['error' => 'This Email is already exists.'], 200);
         }
 
 
@@ -54,7 +54,7 @@ class ApiController extends Controller
             $email = $data['email'];
             try {
                 if (!filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-                    Mail::send('emails.user_register_success', ['name' => ucfirst($user['first_name']) . ' ' . $user['last_name'], 'email' => $email, 'password' => $user['password']], function ($message) use ($email, $project_name) {
+                    Mail::send('emails.user_register_success', ['name' => ucfirst($user['first_name']) . ' ' . $user['last_name'], 'email' => $email, 'password' => $data['password']], function ($message) use ($email, $project_name) {
                         $message->to($email, $project_name)->subject('User registered successfully');
                     });
                 }
@@ -78,7 +78,7 @@ class ApiController extends Controller
         );
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 401);
+            return response()->json(['error' => $validator->errors()], 200);
         }
         $token = auth()->attempt($credentials);
         if ($token ) {
@@ -100,23 +100,23 @@ class ApiController extends Controller
 
         if ($validator->fails()) {
 
-            return response()->json(['error' => $validator->errors()], 401);
+            return response()->json(['error' => $validator->errors()], 200);
         }
 
 
         $check_email_exists = User::where('email', $request['email'])->first();
         if (empty($check_email_exists)) {
-            return response()->json(['error' => 'Email not exists.'], 401);
+            return response()->json(['error' => 'Email not exists.'], 200);
         }
 
 
-        $check_email_exists->otp           =  rand(1111, 9999);
+        $check_email_exists->secret_key           =  rand(1111, 9999);
         if ($check_email_exists->save()) {
             $project_name = env('App_name');
             $email = $request['email'];
             try {
                 if (!filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-                    Mail::send('emails.user_forgot_password_api', ['name' => ucfirst($check_email_exists['first_name']) . ' ' . $check_email_exists['last_name'], 'otp' => $check_email_exists['otp']], function ($message) use ($email, $project_name) {
+                    Mail::send('emails.user_forgot_password_api', ['name' => ucfirst($check_email_exists['first_name']) . ' ' . $check_email_exists['last_name'], 'otp' => $check_email_exists['secret_key']], function ($message) use ($email, $project_name) {
                         $message->to($email, $project_name)->subject('User Forgot Password');
                     });
                 }
@@ -134,7 +134,7 @@ class ApiController extends Controller
         $validator = Validator::make(
             $request->all(),
             [
-                'otp'       =>  'required|numeric',
+                'secret_key'       =>  'required|numeric',
                 'email'      => 'required|email',
                 'password'   => 'required',
                 'confirm_password' => 'required_with:password|same:password'
@@ -143,29 +143,29 @@ class ApiController extends Controller
 
         if ($validator->fails()) {
 
-            return response()->json(['error' => $validator->errors()], 401);
+            return response()->json(['error' => $validator->errors()], 200);
         }
 
 
         $email = $data['email'];
         $check_email = User::where('email', $email)->first();
-        if (empty($check_email['otp'])) {
+        if (empty($check_email['secret_key'])) {
             return response()->json(['error' => 'Something went wrong, Please try again later.']);
         }
         if (empty($check_email)) {
             return response()->json(['error' => 'This Email-id is not exists.']);
         } else {
-            if ($check_email['otp'] == $data['otp']) {
+            if ($check_email['secret_key'] == $data['secret_key']) {
                 $hash_password                  = Hash::make($data['password']);
                 $check_email->password          = str_replace("$2y$", "$2a$", $hash_password);
-                $check_email->otp               = null;
+                $check_email->secret_key               = null;
                 if ($check_email->save()) {
                     return response()->json(['success' => true, 'message' => 'Password changed successfully.']);
                 } else {
                     return response()->json(['error' => 'Something went wrong, Please try again later.']);
                 }
             } else {
-                return response()->json(['error' => 'OTP mismatch']);
+                return response()->json(['error' => 'secret_key mismatch']);
             }
         }
     }
@@ -181,16 +181,35 @@ class ApiController extends Controller
         );
 
         if ($validator->fails()) {
-            return response()->json(['error' => 'Token not found.'], 401);
+            return response()->json(['error' => 'Token not found.'], 200);
         }
 
         try {
             $user = auth()->userOrFail();
         } catch (\Tymon\JWTAuth\Exceptions\UserNotDefinedException $e) {
-            return response()->json(['error' => $q->getMessage()], 401);
+            return response()->json(['error' => $e->getMessage()], 200);
         }
 
         return response()->json(['success' => true, 'data' => $user], 200);
+    }
+
+    public function updateProfile(Request $request)
+    {
+        return $data = $request->all();
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'first_name' => 'required',
+                'last_name'     => 'required',
+                'profile_image'     => 'required',
+                'mobile_number' => 'required|numeric'
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 200);
+        }
+
     }
 
     public function logout()
