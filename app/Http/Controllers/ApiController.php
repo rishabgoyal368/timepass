@@ -32,12 +32,12 @@ class ApiController extends Controller
 
         if ($validator->fails()) {
 
-            return response()->json(['error' => $validator->errors()], 401);
+            return response()->json(['error' => $validator->errors()], 200);
         }
 
         $check_email_exists = User::where('email', $data['email'])->first();
         if (!empty($check_email_exists)) {
-            return response()->json(['error' => 'This Email is already exists.'], 401);
+            return response()->json(['error' => 'This Email is already exists.'], 200);
         }
 
 
@@ -54,7 +54,7 @@ class ApiController extends Controller
             $email = $data['email'];
             try {
                 if (!filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-                    Mail::send('emails.user_register_success', ['name' => ucfirst($user['first_name']) . ' ' . $user['last_name'], 'email' => $email, 'password' => $user['password']], function ($message) use ($email, $project_name) {
+                    Mail::send('emails.user_register_success', ['name' => ucfirst($user['first_name']) . ' ' . $user['last_name'], 'email' => $email, 'password' => $data['password']], function ($message) use ($email, $project_name) {
                         $message->to($email, $project_name)->subject('User registered successfully');
                     });
                 }
@@ -78,7 +78,7 @@ class ApiController extends Controller
         );
 
         if ($validator->fails()) {
-            return response()->json(['error' => $validator->errors()], 401);
+            return response()->json(['error' => $validator->errors()], 200);
         }
         $token = auth()->attempt($credentials);
         if ($token ) {
@@ -100,13 +100,13 @@ class ApiController extends Controller
 
         if ($validator->fails()) {
 
-            return response()->json(['error' => $validator->errors()], 401);
+            return response()->json(['error' => $validator->errors()], 200);
         }
 
 
         $check_email_exists = User::where('email', $request['email'])->first();
         if (empty($check_email_exists)) {
-            return response()->json(['error' => 'Email not exists.'], 401);
+            return response()->json(['error' => 'Email not exists.'], 200);
         }
 
 
@@ -143,7 +143,7 @@ class ApiController extends Controller
 
         if ($validator->fails()) {
 
-            return response()->json(['error' => $validator->errors()], 401);
+            return response()->json(['error' => $validator->errors()], 200);
         }
 
 
@@ -181,16 +181,35 @@ class ApiController extends Controller
         );
 
         if ($validator->fails()) {
-            return response()->json(['error' => 'Token not found.'], 401);
+            return response()->json(['error' => 'Token not found.'], 200);
         }
 
         try {
             $user = auth()->userOrFail();
         } catch (\Tymon\JWTAuth\Exceptions\UserNotDefinedException $e) {
-            return response()->json(['error' => $q->getMessage()], 401);
+            return response()->json(['error' => $e->getMessage()], 200);
         }
 
         return response()->json(['success' => true, 'data' => $user], 200);
+    }
+
+    public function updateProfile(Request $request)
+    {
+        return $data = $request->all();
+        $validator = Validator::make(
+            $request->all(),
+            [
+                'first_name' => 'required',
+                'last_name'     => 'required',
+                'profile_image'     => 'required',
+                'mobile_number' => 'required|numeric'
+            ]
+        );
+
+        if ($validator->fails()) {
+            return response()->json(['error' => $validator->errors()], 200);
+        }
+
     }
 
     public function logout()
