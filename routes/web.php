@@ -28,35 +28,30 @@ Route::group(['prefix'=>'admin','middleware'=>'CheckAdminAuth'],function()
 
 
 	//------Manage User ---------------------------------------------------------------------------
-	Route::get('/manage-users','Admin\UsersController@index');
-	Route::any('/add-user','Admin\UsersController@add');
-	Route::any('edit-user/{id}','Admin\UsersController@add');
-	Route::any('delete-user/{id}','Admin\UsersController@delete');
+	// Route::get('/manage-users','Admin\UsersController@index');
+	// Route::any('/add-user','Admin\UsersController@add');
+	// Route::any('edit-user/{id}','Admin\UsersController@add');
+	// Route::any('delete-user/{id}','Admin\UsersController@delete');
 
 	//------Manage User ---------------------------------------------------------------------------
 
-	//------Category Management  ---------------------------------------------------------------------------
-	Route::get('/category','Admin\CategoryManagement@index');
-	Route::match(['get','post'],'/category/add','Admin\CategoryManagement@add');
-	Route::match(['get','post'],'/category/edit/{id}','Admin\CategoryManagement@edit');
-	Route::match(['get','post'],'/category/delete/{id}','Admin\CategoryManagement@delete');
-	//------Category Management  ---------------------------------------------------------------------------
+	// //------Category Management  ---------------------------------------------------------------------------
+	// Route::get('/category','Admin\CategoryManagement@index');
+	// Route::match(['get','post'],'/category/add','Admin\CategoryManagement@add');
+	// Route::match(['get','post'],'/category/edit/{id}','Admin\CategoryManagement@edit');
+	// Route::match(['get','post'],'/category/delete/{id}','Admin\CategoryManagement@delete');
+	// //------Category Management  ---------------------------------------------------------------------------
 	
     Route::match(['get','post'],'/reset-password','AuthController@reset_password');
     Route::match(['get','post'],'/my-profile','AuthController@my_profile');
 
     //-----------------Actor-----------------------------
 
-    Route::match(['get','post'],'/member','Admin\ActorManagementController@index');
-    Route::match(['get','post'],'/member/add','Admin\ActorManagementController@add');
-    Route::match(['get','post'],'/member/edit/{id}','Admin\ActorManagementController@edit');
-    Route::match(['get','post'],'/member/delete/{id}','Admin\ActorManagementController@delete');
+    // Route::match(['get','post'],'/member','Admin\ActorManagementController@index');
+    // Route::match(['get','post'],'/member/add','Admin\ActorManagementController@add');
+    // Route::match(['get','post'],'/member/edit/{id}','Admin\ActorManagementController@edit');
+    // Route::match(['get','post'],'/member/delete/{id}','Admin\ActorManagementController@delete');
 
     //-----------------Actor-----------------------------
-
-
-
-    // define('AdminProfileBasePath', 'public/assets/img');
-    // define('AdminProfileImgPath', asset('public/assets/img'));
 
 });

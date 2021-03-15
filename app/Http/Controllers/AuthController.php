@@ -38,10 +38,13 @@ class AuthController extends Controller
 
 
     public function logout(){
-    	Auth::logout();
+    	// Auth::logout();
+    	
+    	Auth::guard('admin')->logout();
     	Session::flush();
     	return redirect('/')->with('success','You logged out successfully');
     }
+
 
     public function forgot_password(Request $request){
 		if($request->isMethod('post')){
