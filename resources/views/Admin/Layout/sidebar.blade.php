@@ -17,7 +17,6 @@
         </a>
         <!--submenu-->
         <ul class="sub-menu">
-
             <li class="menu-item ">
                 <a href="{{url('admin/manage-users')}}" class=' menu-link'>
                     <span class="menu-label">
@@ -30,12 +29,12 @@
             </li>
         </ul>
     </li>
-    <li class="menu-item">
+<!--     <li class="menu-item">
         <a href="{{ url('admin/category') }}" class=" menu-link">
             <span class="menu-label">
                 <span class="menu-name">Category Management</span>
 
             </span>
         </a>
-    </li>
+    </li> -->
 </ul>
