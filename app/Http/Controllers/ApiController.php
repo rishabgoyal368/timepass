@@ -6,7 +6,7 @@ use JWTAuth;
 use Validator;
 use IlluminateHttpRequest;
 use AppHttpRequestsRegisterAuthRequest;
-use TymonJWTAuthExceptionsJWTException;
+// use TymonJWTAuthExceptionsJWTException;
 use SymfonyComponentHttpFoundationResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -212,12 +212,12 @@ class ApiController extends Controller
 
     }
 
-    public function logout()
-    {
-        Auth::guard('api')->logout();
+    // public function logout()
+    // {
+    //     Auth::guard('api')->logout();
 
-        return response()->json(['status' => 'success', 'message' => 'logout'], 200);
-    }
+    //     return response()->json(['status' => 'success', 'message' => 'logout'], 200);
+    // }
 
 
     public function respondWithToken($token)

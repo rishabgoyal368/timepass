@@ -66,7 +66,7 @@
 
                             </p>
                             <p class="admin-brand-content">
-                                atmos
+                                Math Learning
                             </p>
                         </div>
                         <h3 class="text-center p-b-20 fw-400">Login</h3>
@@ -85,7 +85,7 @@
                             @csrf
                         </form>
                         <p class="text-right p-t-10">
-                            <a href="{{ url('/forgot-password') }}" class="text-underline">Forgot Password?</a>
+                            <!-- <a href="{{ url('/forgot-password') }}" class="text-underline">Forgot Password?</a> -->
                         </p>
                     </div>
 

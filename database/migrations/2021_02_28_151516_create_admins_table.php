@@ -21,7 +21,7 @@ class CreateAdminsTable extends Migration
             $table->string('mobile_number')->nullable();
             $table->string('profile_image')->nullable();
             $table->string('password');
-            $table->string('status')->nullable();
+            $table->string('status')->default('inactive');
             $table->timestamps();
         });
     }
