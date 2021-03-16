@@ -5,10 +5,21 @@ namespace App;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+<<<<<<< HEAD
 
 class User extends Authenticatable
 {
     use Notifiable;
+=======
+use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Database\Eloquent\SoftDeletes;
+
+
+class User extends Authenticatable implements JWTSubject
+{
+    use Notifiable;
+    use SoftDeletes;
+>>>>>>> f90c647ff0c72374933ffb975bc74557aa62bab3
 
     /**
      * The attributes that are mass assignable.
@@ -20,6 +31,10 @@ class User extends Authenticatable
         'first_name',
         'last_name',
         'email',
+<<<<<<< HEAD
+=======
+        // 'email_verified_at',
+>>>>>>> f90c647ff0c72374933ffb975bc74557aa62bab3
         'mobile_number',
         'profile_image',
         'password',

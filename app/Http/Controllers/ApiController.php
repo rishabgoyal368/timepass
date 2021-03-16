@@ -60,9 +60,9 @@ class ApiController extends Controller
                 }
             } catch (Exception $e) {
             }
-            return response()->json(['success' => true, 'data' => $user], Response::HTTP_OK);
+            return response()->json(['success' => true, 'data' => $user], 200);
         } else {
-            return response()->json(['error' => false, 'data' => 'Something went wrong, Please try again later.']);
+            return response()->json(['error' => false, 'data' => 'Something went wrong, Please try again later.'],200);
         }
     }
 
@@ -85,7 +85,7 @@ class ApiController extends Controller
             return $this->respondWithToken($token);
         } else {
             $response = ["message" => 'Invalid Details'];
-            return response($response, 422);
+            return response($response, 200);
         }
     }
 
@@ -116,15 +116,15 @@ class ApiController extends Controller
             $email = $request['email'];
             try {
                 if (!filter_var($email, FILTER_VALIDATE_EMAIL) === false) {
-                    Mail::send('emails.user_forgot_password_api', ['name' => ucfirst($check_email_exists['first_name']) . ' ' . $check_email_exists['last_name'], 'otp' => $check_email_exists['secret_key']], function ($message) use ($email, $project_name) {
+                    Mail::send('emails.user_forgot_password_api', ['name' => ucfirst($check_email_exists['first_name']) . ' ' . $check_email_exists['last_name'], 'otp' => $check_email_exists['secret_keyF']], function ($message) use ($email, $project_name) {
                         $message->to($email, $project_name)->subject('User Forgot Password');
                     });
                 }
             } catch (Exception $e) {
             }
-            return response()->json(['success' => true, 'data' => 'Email sent on registered Email-id.'], Response::HTTP_OK);
+            return response()->json(['success' => true, 'data' => 'Email sent on registered Email-id.'], 200);
         } else {
-            return response()->json(['error' => false, 'data' => 'Something went wrong, Please try again later.']);
+            return response()->json(['error' => false, 'data' => 'Something went wrong, Please try again later.'],200);
         }
     }
 
@@ -150,22 +150,22 @@ class ApiController extends Controller
         $email = $data['email'];
         $check_email = User::where('email', $email)->first();
         if (empty($check_email['secret_key'])) {
-            return response()->json(['error' => 'Something went wrong, Please try again later.']);
+            return response()->json(['error' => 'Something went wrong, Please try again later.'],200);
         }
         if (empty($check_email)) {
-            return response()->json(['error' => 'This Email-id is not exists.']);
+            return response()->json(['error' => 'This Email-id is not exists.'],200);
         } else {
             if ($check_email['secret_key'] == $data['secret_key']) {
                 $hash_password                  = Hash::make($data['password']);
                 $check_email->password          = str_replace("$2y$", "$2a$", $hash_password);
                 $check_email->secret_key               = null;
                 if ($check_email->save()) {
-                    return response()->json(['success' => true, 'message' => 'Password changed successfully.']);
+                    return response()->json(['success' => true, 'message' => 'Password changed successfully.'],200);
                 } else {
-                    return response()->json(['error' => 'Something went wrong, Please try again later.']);
+                    return response()->json(['error' => 'Something went wrong, Please try again later.'],200);
                 }
             } else {
-                return response()->json(['error' => 'secret_key mismatch']);
+                return response()->json(['error' => 'secret_key mismatch'],200);
             }
         }
     }

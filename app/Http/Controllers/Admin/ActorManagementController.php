@@ -8,12 +8,10 @@ use App\Member;
 
 class ActorManagementController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-
         $members = Member::get()->toArray();
-        // dd($actorList);
-        $label = $_GET['type'];
+        $label = @$request->get('type') ?: 'Actor';
         return view('Admin.Member.list', compact('label', 'members'));
     }
 
@@ -72,11 +70,11 @@ class ActorManagementController extends Controller
 
     public function delete(Request $request, $id)
     {
-        $delete = Category::where('id', $id)->delete();
+        $delete = Member::where('id', $id)->delete();
         if ($delete) {
-            return redirect()->back()->with('success', 'Category deleted successfully');
+            return redirect()->back()->with('success', 'Member deleted successfully');
         } else {
-            return redirect('admin/category')->with('error', 'Something went wrong, Please try again later.');
+            return redirect()->back()->with('error', 'Something went wrong, Please try again later.');
         }
     }
 }
