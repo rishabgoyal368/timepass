@@ -85,7 +85,7 @@
                             @csrf
                         </form>
                         <p class="text-right p-t-10">
-                            <!-- <a href="{{ url('/forgot-password') }}" class="text-underline">Forgot Password?</a> -->
+                            <a href="{{ url('/forgot-password') }}" class="text-underline">Forgot Password?</a>
                         </p>
                     </div>
 
