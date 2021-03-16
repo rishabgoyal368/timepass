@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
-
 use App\User;
 use Auth;
 
@@ -26,8 +25,7 @@ class UsersController extends Controller
     }
 
     public function add(Request $request, $id = null)
-    {
-        // try {
+    {        
             if ($request->isMethod('GET')) {
                 if ($id) {
                     $formLabel = 'Edit';
@@ -61,9 +59,5 @@ class UsersController extends Controller
                 $msz = $request['id'] ? 'Updated' : 'Added';
                 return redirect('admin/manage-users')->with(['success', 'User ' . $msz . ' Successfully']);
             }
-        // } catch (\Exception $e) {
-        //     return $e->getMessage();
-        //     return redirect()->back()->with(['error' => $e->getMessage()]);
-        // }
     }
 }

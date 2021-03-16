@@ -10,17 +10,12 @@ use Auth;
 class AuthController extends Controller
 {
     public function login(Request $request){
-		// Admin::create([
-		// 	'user_name' => 'Rishab',
-		// 	'email' => 'rishabtest01@yopmail.com',
-		// 	'password' => Hash::make('123'),
-		// ]);
+		
     	if(Auth::guard('admin')->check()) {
             return redirect('admin/home');
         }
         if($request->isMethod('post')){
     		$data = $request->all();
-    		// echo '<pre>'; print_r($data); die;
 
     		$credentials = array(
     				'email'=>$data['email'],
@@ -43,10 +38,13 @@ class AuthController extends Controller
 
 
     public function logout(){
-    	Auth::logout();
+    	// Auth::logout();
+    	
+    	Auth::guard('admin')->logout();
     	Session::flush();
     	return redirect('/')->with('success','You logged out successfully');
     }
+
 
     public function forgot_password(Request $request){
 		if($request->isMethod('post')){

@@ -91,7 +91,7 @@
                             <div class="form-row">
                                 <div class="form-group col-md-12">
                                     <label for="inputPassword4">Status</label>
-                                    <select name="status" class="form-control js-select2">
+                                    <select name="status" class="form-control js-select2" required>
                                         <option selected disabled>Select Status</option>
                                         <option value="Active">Active</option>
                                         <option value="Deactivate">Deactivate</option>
@@ -105,7 +105,7 @@
                             </div>
                             <div class="form-group">
                                 <input type="submit" value="Submit" class="btn btn-primary">
-                                <a id="back_redirect" class="btn btn-info">Back</a>
+                                <a href="{{url('/admin/manage-users')}}" class="btn btn-info">Back</a>
                             </div>
                         </form>
                     </div>
@@ -120,5 +120,18 @@
 
     </div>
 </section>
-
+<script type="text/javascript">
+    $('#add_edit_user').validate({
+        rules: {
+            title: {
+                required: true,
+                minlength: 2,
+                maxlength: 30,
+            },
+            type: {
+                required: true,
+            },
+        },
+    });
+</script>
 @endsection

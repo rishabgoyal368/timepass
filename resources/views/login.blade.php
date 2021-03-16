@@ -66,7 +66,7 @@
 
                             </p>
                             <p class="admin-brand-content">
-                                atmos
+                                Math Learning
                             </p>
                         </div>
                         <h3 class="text-center p-b-20 fw-400">Login</h3>
