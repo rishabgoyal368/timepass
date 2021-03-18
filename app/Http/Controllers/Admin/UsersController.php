@@ -27,7 +27,7 @@ class UsersController extends Controller
 
     public function add(Request $request, $id = null)
     {
-        try {
+        // try {
             if ($request->isMethod('GET')) {
                 if ($id) {
                     $formLabel = 'Edit';
@@ -42,7 +42,7 @@ class UsersController extends Controller
                 $data = $request->all();
                 $validator =  Validator::make($data, [
                     'first_name' =>  'required',
-                    'email' => 'required|email',
+                    'email' => 'required|email|unique:users,email,' . @$data['id'] . ',id',
                     'mobile_number' => 'required|numeric',
                     'status' => 'required',
                     'password' => @$data['id'] ? 'nullable' : 'required|confirmed',
@@ -58,14 +58,15 @@ class UsersController extends Controller
                     $data['password'] = Hash::make($request['password']);
                     $msz =  'Added';
                 }
+                // return $data;
                 $users =  User::addEdit($data);
                 $msz = $request['id'] ? 'Updated' : 'Added';
                 return redirect('admin/manage-users')->with(['success', 'User ' . $msz . ' Successfully']);
             }
-        } catch (\Exception $e) {
-            return $e->getMessage();
-            return redirect()->back()->with(['error' => $e->getMessage()]);
-        }
+        // } catch (\Exception $e) {
+        //     return $e->getMessage();
+        //     return redirect()->back()->with(['error' => $e->getMessage()]);
+        // }
     }
 
     public function delete($id)

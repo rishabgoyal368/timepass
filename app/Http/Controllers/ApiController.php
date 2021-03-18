@@ -60,9 +60,9 @@ class ApiController extends Controller
                 }
             } catch (Exception $e) {
             }
-            return response()->json(['success' => true, 'data' => $user], Response::HTTP_OK);
+            return response()->json(['success' => true, 'data' => $user], 200);
         } else {
-            return response()->json(['error' => false, 'data' => 'Something went wrong, Please try again later.']);
+            return response()->json(['error' => false, 'data' => 'Something went wrong, Please try again later.'], 200);
         }
     }
 
@@ -122,9 +122,9 @@ class ApiController extends Controller
                 }
             } catch (Exception $e) {
             }
-            return response()->json(['success' => true, 'data' => 'Email sent on registered Email-id.'], Response::HTTP_OK);
+            return response()->json(['success' => true, 'data' => 'Email sent on registered Email-id.'], 200);
         } else {
-            return response()->json(['error' => false, 'data' => 'Something went wrong, Please try again later.']);
+            return response()->json(['error' => false, 'data' => 'Something went wrong, Please try again later.'], 200);
         }
     }
 
@@ -150,22 +150,22 @@ class ApiController extends Controller
         $email = $data['email'];
         $check_email = User::where('email', $email)->first();
         if (empty($check_email['secret_key'])) {
-            return response()->json(['error' => 'Something went wrong, Please try again later.']);
+            return response()->json(['error' => 'Something went wrong, Please try again later.'], 200);
         }
         if (empty($check_email)) {
-            return response()->json(['error' => 'This Email-id is not exists.']);
+            return response()->json(['error' => 'This Email-id is not exists.'], 200);
         } else {
             if ($check_email['secret_key'] == $data['secret_key']) {
                 $hash_password                  = Hash::make($data['password']);
                 $check_email->password          = str_replace("$2y$", "$2a$", $hash_password);
                 $check_email->secret_key               = null;
                 if ($check_email->save()) {
-                    return response()->json(['success' => true, 'message' => 'Password changed successfully.']);
+                    return response()->json(['success' => true, 'message' => 'Password changed successfully.'], 200);
                 } else {
-                    return response()->json(['error' => 'Something went wrong, Please try again later.']);
+                    return response()->json(['error' => 'Something went wrong, Please try again later.'], 200);
                 }
             } else {
-                return response()->json(['error' => 'secret_key mismatch']);
+                return response()->json(['error' => 'secret_key mismatch'], 200);
             }
         }
     }
@@ -186,6 +186,7 @@ class ApiController extends Controller
 
         try {
             $user = auth()->userOrFail();
+            $user['profile_image'] = @$user->profile_image ? env('APP_URL').'uploads/'.$user->profile_image : 'http://www.pngall.com/wp-content/uploads/5/Profile-Male-PNG-180x180.png';
         } catch (\Tymon\JWTAuth\Exceptions\UserNotDefinedException $e) {
             return response()->json(['error' => $e->getMessage()], 200);
         }
@@ -195,13 +196,14 @@ class ApiController extends Controller
 
     public function updateProfile(Request $request)
     {
-        return $data = $request->all();
+        $data = $request->all();
         $validator = Validator::make(
             $request->all(),
             [
                 'first_name' => 'required',
                 'last_name'     => 'required',
                 'profile_image'     => 'required',
+                'email'     => 'required',
                 'mobile_number' => 'required|numeric'
             ]
         );
@@ -210,12 +212,25 @@ class ApiController extends Controller
             return response()->json(['error' => $validator->errors()], 200);
         }
 
+        $user =   auth()->userOrFail();
+        $user->first_name         = $data['first_name'];
+        $user->last_name          = $data['last_name'];
+        $user->email              = $data['email'];
+        $user->mobile_number     = $data['mobile_number'];
+        if($data['profile_image'])
+        {
+            $fileName = time() . '.' . $request->profile_image->extension();
+            $request->profile_image->move(public_path('uploads'), $fileName);
+            $user->profile_image     = $fileName;
+        }
+        $user->save();
+        return response()->json(['success' => true, 'data' => $user,'message' => 'Profile updated successfully!'], 200);
+
     }
 
     public function logout()
     {
         Auth::guard('api')->logout();
-
         return response()->json(['status' => 'success', 'message' => 'logout'], 200);
     }
 
