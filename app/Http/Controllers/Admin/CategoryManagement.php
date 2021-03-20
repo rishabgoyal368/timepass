@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Request;
 use App\Category;
 
@@ -25,6 +26,13 @@ class CategoryManagement extends Controller
     {
         if ($request->isMethod('post')) {
             $data                   = $request->all();
+            $data = $request->all();
+            $validator =  Validator::make($data, [
+                'title' => 'required|unique:categories,title,' . @$data['id'] . ',id',
+            ]);
+            if ($validator->fails()) {
+                return redirect()->back()->withInput()->withErrors($validator->errors());
+            }
             $add_category           = new Category;
             $add_category->title    = $data['title'];
             // $add_category->type     = $data['type'];
@@ -41,14 +49,19 @@ class CategoryManagement extends Controller
     public function edit(Request $request, $id)
     {
         if ($request->isMethod('post')) {
-            $data                   = $request->all();
-            $edit_category           = Category::find($id);
+            $data = $request->all();
+            $validator =  Validator::make($data, [
+                'title' => 'required|unique:categories,title,' . @$data['id'] . ',id',
+            ]);
+            if ($validator->fails()) {
+                return redirect()->back()->withInput()->withErrors($validator->errors());
+            }
+            $edit_category = Category::find($id);
             $edit_category->title    = $data['title'];
-            // $edit_category->type     = $data['type'];
             if ($edit_category->save()) {
-                return redirect()->back()->with('success', 'Category edited successfully');
+                return redirect('admin/category')->with('success', 'Category edited successfully');
             } else {
-                return redirect('admin/category')->with('error', 'Something went wrong, Please try again later.');
+                return redirect()->back()->with('error', 'Something went wrong, Please try again later.');
             }
         }
         $category_details = Category::where('id', $id)->first();

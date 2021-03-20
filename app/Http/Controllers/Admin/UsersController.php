@@ -25,7 +25,8 @@ class UsersController extends Controller
     }
 
     public function add(Request $request, $id = null)
-    {        
+    {
+        try {
             if ($request->isMethod('GET')) {
                 if ($id) {
                     $formLabel = 'Edit';
@@ -40,7 +41,7 @@ class UsersController extends Controller
                 $data = $request->all();
                 $validator =  Validator::make($data, [
                     'first_name' =>  'required',
-                    'email' => 'required|email',
+                    'email' => 'required|email|unique:users,email,' . @$data['id'] . ',id',
                     'mobile_number' => 'required|numeric',
                     'status' => 'required',
                     'password' => @$data['id'] ? 'nullable' : 'required|confirmed',
@@ -55,9 +56,23 @@ class UsersController extends Controller
                 } else {
                     $msz =  'Added';
                 }
+                // return $data;
                 $users =  User::addEdit($data);
                 $msz = $request['id'] ? 'Updated' : 'Added';
                 return redirect('admin/manage-users')->with(['success', 'User ' . $msz . ' Successfully']);
             }
+        } catch (\Exception $e) {
+            return redirect()->back()->with(['error' => $e->getMessage()]);
+        }
+    }
+
+    public function delete($id)
+    {
+        $delete = User::where('id', $id)->delete();
+        if ($delete) {
+            return redirect()->back()->with('success', 'User deleted successfully');
+        } else {
+            return redirect('admin/category')->with('error', 'Something went wrong, Please try again later.');
+        }
     }
 }
