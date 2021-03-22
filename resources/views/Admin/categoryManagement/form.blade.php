@@ -32,16 +32,22 @@ if (isset($category_details)) {
                 <div class="card m-b-30">
                     <div class="card-body ">
                         <form action="{{ $action }}" method="post" id="category_form">
+                            <input type="hidden" name="id" value="{{@$category_details['id']}}">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputEmail4">Title</label>
                                     <input type="text" class="form-control" name="title" value="{{ @$category_details['title'] }}" placeholder="Title">
+                                    @if ($errors->has('title'))
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $errors->first('title') }}</strong>
+                                    </span>
+                                    @endif
                                 </div>
                             </div>
                             @csrf
                             <div class="form-group">
                                 <input type="submit" value="Submit" class="btn btn-primary">
-                                <a href="{{'/admin/category'}}" class="btn btn-info">Back</a>
+                                <a href="{{'/admin/member'}}" class="btn btn-info">Back</a>
                             </div>
                         </form>
                     </div>

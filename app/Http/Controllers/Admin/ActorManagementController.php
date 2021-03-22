@@ -8,12 +8,10 @@ use App\Member;
 
 class ActorManagementController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-
-        $members = Member::get()->toArray();
-        // dd($actorList);
-        $label = $_GET['type'];
+        $label = @$_GET['type'] ?: 'Actor';
+        $members = Member::where('type',$label)->get();
         return view('Admin.Member.list', compact('label', 'members'));
     }
 
@@ -47,8 +45,7 @@ class ActorManagementController extends Controller
     {
         if ($request->isMethod('post')) {
             $data                       = $request->all();
-            // dd($data);
-            $add_actor                  = new Member;
+            $add_actor                  = Member::find($request->id);
             $add_actor->first_name      = $data['first_name'];
             $add_actor->last_name       = $data['last_name'];
             $add_actor->address         = $data['address'];
@@ -60,7 +57,7 @@ class ActorManagementController extends Controller
                 $add_actor->image  =    $fileName;
             }
             if ($add_actor->save()) {
-                return redirect()->back()->with('success', $_GET['type'].' Edited successfully');
+                return redirect('admin/member?'.$data['type'])->with('success', $_GET['type'].' Edited successfully');
             } else {
                 return redirect()->back()->with('error', 'Something went wrong, Please try again later.');
             }
@@ -72,11 +69,11 @@ class ActorManagementController extends Controller
 
     public function delete(Request $request, $id)
     {
-        $delete = Category::where('id', $id)->delete();
+        $delete = Member::where('id', $id)->delete();
         if ($delete) {
-            return redirect()->back()->with('success', 'Category deleted successfully');
+            return redirect()->back()->with('success', 'Member deleted successfully');
         } else {
-            return redirect('admin/category')->with('error', 'Something went wrong, Please try again later.');
+            return redirect()->back()->with('error', 'Something went wrong, Please try again later.');
         }
     }
 }

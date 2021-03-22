@@ -93,8 +93,8 @@
                                     <label for="inputPassword4">Status</label>
                                     <select name="status" class="form-control js-select2" required>
                                         <option selected disabled>Select Status</option>
-                                        <option value="Active">Active</option>
-                                        <option value="Deactivate">Deactivate</option>
+                                        <option value="Active" @if(@$user->status == 'Active') selected @endif>Active</option>
+                                        <option value="Deactivate" @if(@$user->status == 'Deactivate') selected @endif>Deactivate</option>
                                     </select>
                                     @if ($errors->has('status'))
                                     <span class="invalid-feedback" role="alert">
@@ -122,15 +122,28 @@
 </section>
 <script type="text/javascript">
     $('#add_edit_user').validate({
+        ignore: [],
         rules: {
             title: {
                 required: true,
                 minlength: 2,
                 maxlength: 30,
             },
+            password_confirmation: {
+                equalTo: "#password"
+            },
             type: {
                 required: true,
             },
+        },
+        errorPlacement: function(error, element) {
+            if (element.parent('.input-group').length) {
+                error.insertAfter(element.parent()); // radio/checkbox?
+            } else if (element.hasClass('js-select2')) {
+                error.insertAfter(element.next('span')); // select2
+            } else {
+                error.insertAfter(element); // default
+            }
         },
     });
 </script>

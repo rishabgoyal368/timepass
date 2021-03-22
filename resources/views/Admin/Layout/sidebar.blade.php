@@ -8,16 +8,15 @@
         </a>
     </li>
     <li class="menu-item ">
-        <a href="#" class="open-dropdown menu-link">
+      <!--   <a href="#" class="open-dropdown menu-link">
             <span class="menu-label">
                 <span class="menu-name">Manage User
                     <span class="menu-arrow"></span>
                 </span>
             </span>
-        </a>
+        </a> -->
         <!--submenu-->
         <ul class="sub-menu">
-
             <li class="menu-item ">
                 <a href="{{url('admin/manage-users')}}" class=' menu-link'>
                     <span class="menu-label">
@@ -30,54 +29,16 @@
             </li>
         </ul>
     </li>
-    <li class="menu-item">
+
+<!--     <li class="menu-item">
         <a href="{{ url('admin/category') }}" class=" menu-link">
             <span class="menu-label">
                 <span class="menu-name">Category Management</span>
 
             </span>
         </a>
-    </li>
-        <li class="menu-item ">
-        <a href="#" class="open-dropdown menu-link">
-            <span class="menu-label">
-                <span class="menu-name">Manage Members
-                    <span class="menu-arrow"></span>
-                </span>
-            </span>
-        </a>
-        <!--submenu-->
-        <ul class="sub-menu">
-            <li class="menu-item ">
-                <a href="{{ url('admin/member') }}?type=Actor" class=' menu-link'>
-                    <span class="menu-label">
-                        <span class="menu-name">Actor</span>
-                    </span>
-                    <span class="menu-icon">
-                        <i class="icon-placeholder  mdi mdi-shape-circle-plus "></i>
-                    </span>
-                </a>
-            </li>
-            <li class="menu-item ">
-                <a href="{{ url('admin/member') }}?type=Crew-member" class=' menu-link'>
-                    <span class="menu-label">
-                        <span class="menu-name">Crew Member</span>
-                    </span>
-                    <span class="menu-icon">
-                        <i class="icon-placeholder  mdi mdi-shape-circle-plus "></i>
-                    </span>
-                </a>
-            </li>
-            <li class="menu-item ">
-                <a href="{{ url('admin/member') }}?type=Director" class=' menu-link'>
-                    <span class="menu-label">
-                        <span class="menu-name">Director</span>
-                    </span>
-                    <span class="menu-icon">
-                        <i class="icon-placeholder  mdi mdi-shape-circle-plus "></i>
-                    </span>
-                </a>
-            </li>
+    </li> -->
+ 
 
         </ul>
 
@@ -98,4 +59,5 @@
             </span>
         </a>
     </li>
+
 </ul>

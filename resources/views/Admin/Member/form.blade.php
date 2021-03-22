@@ -1,10 +1,10 @@
 <?php
 if (isset($member_details)) {
     $title = 'Edit';
-    $action = url('admin/member/edit/' . $member_details['id'].'?type='.$_GET['type']);
+    $action = url('admin/member/edit/' . $member_details['id'] . '?type=' . $_GET['type']);
 } else {
     $title = 'Add';
-    $action = url('admin/member/add?type='.$_GET['type']);
+    $action = url('admin/member/add?type=' . $_GET['type']);
 }
 ?>
 @extends('Admin.Layout.app')
@@ -32,6 +32,7 @@ if (isset($member_details)) {
                 <div class="card m-b-30">
                     <div class="card-body ">
                         <form action="{{ $action }}" method="post" id="member_form" enctype="multipart/form-data">
+                            <input type="hidden" name="id" value="{{ @$member_details['id'] }}">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputEmail4">First Name</label>
@@ -49,10 +50,16 @@ if (isset($member_details)) {
                                     <label for="inputEmail4">Gender</label>
                                     <select class="form-control" name="gender">
                                         <option disabled selected>Select</option>
-                                        <option <?php if(@$member_details['gender'] == 'male'){ echo "selected";} ?> value="male">Male</option>
-                                        <option <?php if(@$member_details['gender'] == 'female'){ echo "selected";} ?> value="female">Female</option>
-                                        <option <?php if(@$member_details['gender'] == 'other'){ echo "selected";} ?> value="other">Other</option>
-                                        
+                                        <option <?php if (@$member_details['gender'] == 'male') {
+                                                    echo "selected";
+                                                } ?> value="male">Male</option>
+                                        <option <?php if (@$member_details['gender'] == 'female') {
+                                                    echo "selected";
+                                                } ?> value="female">Female</option>
+                                        <option <?php if (@$member_details['gender'] == 'other') {
+                                                    echo "selected";
+                                                } ?> value="other">Other</option>
+
                                     </select>
                                 </div>
                                 <div class="form-group col-md-6">
