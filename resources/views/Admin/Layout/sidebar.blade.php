@@ -81,4 +81,12 @@
 
         </ul>
     </li>
+     <li class="menu-item active ">
+        <a href="{{ url('admin/subscription-list') }}" class=" menu-link">
+            <span class="menu-label">
+                <span class="menu-name">Subscription Pacakages</span>
+
+            </span>
+        </a>
+    </li>
 </ul>

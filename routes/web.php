@@ -55,6 +55,15 @@ Route::group(['prefix'=>'admin','middleware'=>'CheckAdminAuth'],function()
     //-----------------Actor-----------------------------
 
 
+    //----------------Subscription --------------------
+ 	Route::match(['get','post'],'/subscription-list','Admin\SubscriptionController@index');
+    Route::match(['get','post'],'/subscription-list/add','Admin\SubscriptionController@add');
+    Route::match(['get','post'],'/subscription-list/edit/{id}','Admin\SubscriptionController@edit');
+    Route::match(['get','post'],'/subscription-list/delete/{id}','Admin\SubscriptionController@delete');
+    Route::match(['get','post'],'/subscription-list/validate/name','Admin\SubscriptionController@validate_name');
+    
+    //----------------Subscription --------------------
+
 
     // define('AdminProfileBasePath', 'public/assets/img');
     // define('AdminProfileImgPath', asset('public/assets/img'));
