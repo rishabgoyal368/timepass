@@ -81,10 +81,18 @@
 
         </ul>
     </li>
-     <li class="menu-item active ">
+     <li class="menu-item">
         <a href="{{ url('admin/subscription-list') }}" class=" menu-link">
             <span class="menu-label">
                 <span class="menu-name">Subscription Pacakages</span>
+
+            </span>
+        </a>
+    </li>
+     <li class="menu-item">
+        <a href="{{ url('admin/movie') }}" class=" menu-link">
+            <span class="menu-label">
+                <span class="menu-name">Movies</span>
 
             </span>
         </a>

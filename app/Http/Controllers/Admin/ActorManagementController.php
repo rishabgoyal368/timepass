@@ -48,7 +48,7 @@ class ActorManagementController extends Controller
         if ($request->isMethod('post')) {
             $data                       = $request->all();
             // dd($data);
-            $add_actor                  = new Member;
+            $add_actor                  = new Movie;
             $add_actor->first_name      = $data['first_name'];
             $add_actor->last_name       = $data['last_name'];
             $add_actor->address         = $data['address'];

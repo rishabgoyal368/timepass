@@ -64,6 +64,14 @@ Route::group(['prefix'=>'admin','middleware'=>'CheckAdminAuth'],function()
     
     //----------------Subscription --------------------
 
+    //----------------Movies --------------------
+ 	Route::match(['get','post'],'/movie','Admin\MovieController@index');
+ 	Route::match(['get','post'],'/movie/add','Admin\MovieController@add');
+ 	Route::match(['get','post'],'/movie/edit/{id}','Admin\MovieController@edit');
+ 	Route::match(['get','post'],'/movie/delete/{id}','Admin\MovieController@delete');
+
+    //----------------Movies --------------------
+
 
     // define('AdminProfileBasePath', 'public/assets/img');
     // define('AdminProfileImgPath', asset('public/assets/img'));
