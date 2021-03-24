@@ -26,7 +26,7 @@ class ApiController extends Controller
                 'last_name' => 'required',
                 'email' => 'required|email|unique:users,email,Null,id,deleted_at,NULL',
                 'password' => 'required',
-                'mobile_number' => 'required|numeric|unique:users,mobile_number',
+                'mobile_number' => 'required|numeric',
             ]
         );
 
@@ -189,7 +189,7 @@ class ApiController extends Controller
             [
                 'first_name' => 'required',
                 'last_name'     => 'required',
-                'profile_image'     => 'required',
+                //'profile_image'     => 'required',
                 'email'     => 'required',
                 'mobile_number' => 'required|numeric'
             ]
@@ -207,7 +207,7 @@ class ApiController extends Controller
         $user->last_name          = $data['last_name'];
         $user->email              = $data['email'];
         $user->mobile_number     = $data['mobile_number'];
-        if ($data['profile_image']) {
+        if (@$data['profile_image']) {
             $fileName = time() . '.' . $request->profile_image->extension();
             $request->profile_image->move(public_path('uploads'), $fileName);
             $user->profile_image     = $fileName;
