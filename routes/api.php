@@ -16,6 +16,9 @@ use App\Http\Controllers\ApiController;
 //------------movie-listing-----------------
 Route::get('/movie-list', 'Api\MovieController@index');
 //------------movie-listing-----------------
+//------------subscription--------------------
+Route::get('/subscription-list', 'Api\SubscriptionController@index');
+//------------subscription--------------------
 
 
 Route::post('/register', 'ApiController@user_registration');

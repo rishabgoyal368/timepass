@@ -11,19 +11,18 @@ use SymfonyComponentHttpFoundationResponse;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Response;
-use App\Movie, App\Member, App\MovieMember;
+use App\Subscription;
 
-class MovieController extends Controller
+class SubscriptionController extends Controller
 {
     public function index(){
         
     	try {
     		$paginate = env('Paginate');
-    		// print_r($paginate);die;
-            $movie_list = Movie::with('movie_member.members')->paginate($paginate);
+            $subscription_list = Subscription::paginate($paginate);
         } catch (\Tymon\JWTAuth\Exceptions\UserNotDefinedException $e) {
             return response()->json(['error' => $e->getMessage()], 200);
         }
-        return response()->json(['success' => true, 'data' => $movie_list], Response::HTTP_OK);
+        return response()->json(['success' => true, 'data' => $subscription_list], Response::HTTP_OK);
     }
 }
