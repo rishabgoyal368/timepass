@@ -13,7 +13,7 @@ class SubscriptionController extends Controller
     {
         $subscription_list = Subscription::get()->toArray();
         $label = 'Subscription';
-        return view('Admin.Subscription.list', compact('label', 'subscription_list'));
+        return view('Admin.subscription.list', compact('label', 'subscription_list'));
     }
 
     public function add(Request $request)
@@ -36,7 +36,7 @@ class SubscriptionController extends Controller
             }
         }
         $label = 'Subscription';
-        return view('Admin.Subscription.form', compact('label'));
+        return view('Admin.subscription.form', compact('label'));
     }
 
     public function edit(Request $request, $id)
@@ -60,7 +60,7 @@ class SubscriptionController extends Controller
         }
         $subscription_details = Subscription::where('id', $id)->first();
         $label ='Subscription';
-        return view('Admin.Subscription.form', compact('label', 'subscription_details'));
+        return view('Admin.subscription.form', compact('label', 'subscription_details'));
     }
 
     public function delete(Request $request, $id)

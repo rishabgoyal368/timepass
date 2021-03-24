@@ -32,7 +32,7 @@
                                         <th>Id</th>
                                         <th>Name</th>
                                         <th>Description</th>
-                                        <!-- <th>Action</th> -->
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -41,12 +41,11 @@
                                             <tr>
                                                 <td>{{ $key+1 }}</td>
                                                 <td>{{ ucfirst($value['name']) }}</td>
-                                                <td>{{ ucfirst($value['description']) }}</td>
-                                                <!-- <td>{{ ucfirst($value['name']) }}</td> -->
-                                               <!--  <td>
+                                                <td>{{ ucfirst($value['description']) }}</td>s
+                                                <td>
                                                     <a href="{{ url('admin/movie/edit/'.$value['id']) }}" title="Edit"><i class="fa fa-edit"></i></a>
                                                     <a href="{{ url('admin/movie/delete/'.$value['id']) }}" class="del_btn" title="Delete"><i class="fa fa-trash"></i></a>
-                                                </td> -->
+                                                </td>
                                             </tr>
                                         @endforeach
                                     @endif

@@ -17,7 +17,10 @@ class CreateMoviesTable extends Migration
             $table->id();
             $table->String('name');
             $table->String('tag');
+            $table->String('category');
+            $table->String('thumbnail');
             $table->String('video');
+            $table->date('release_date');
             $table->longText('description');
             $table->timestamps();
         });

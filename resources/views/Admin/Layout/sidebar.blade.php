@@ -17,7 +17,6 @@
         </a>
         <!--submenu-->
         <ul class="sub-menu">
-
             <li class="menu-item ">
                 <a href="{{url('admin/manage-users')}}" class=' menu-link'>
                     <span class="menu-label">
@@ -30,15 +29,7 @@
             </li>
         </ul>
     </li>
-    <li class="menu-item">
-        <a href="{{ url('admin/category') }}" class=" menu-link">
-            <span class="menu-label">
-                <span class="menu-name">Category Management</span>
-
-            </span>
-        </a>
-    </li>
-        <li class="menu-item ">
+    <li class="menu-item ">
         <a href="#" class="open-dropdown menu-link">
             <span class="menu-label">
                 <span class="menu-name">Manage Members
@@ -81,18 +72,20 @@
 
         </ul>
     </li>
-     <li class="menu-item">
-        <a href="{{ url('admin/subscription-list') }}" class=" menu-link">
+
+    <li class="menu-item ">
+        <a href="{{ url('admin/movie') }}" class=" menu-link">
             <span class="menu-label">
-                <span class="menu-name">Subscription Pacakages</span>
+                <span class="menu-name">Movies</span>
 
             </span>
         </a>
     </li>
-     <li class="menu-item">
-        <a href="{{ url('admin/movie') }}" class=" menu-link">
+
+    <li class="menu-item">
+        <a href="{{ url('admin/subscription-list') }}" class=" menu-link">
             <span class="menu-label">
-                <span class="menu-name">Movies</span>
+                <span class="menu-name">Subscription Pacakages</span>
 
             </span>
         </a>

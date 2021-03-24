@@ -35,12 +35,12 @@ Route::group(['prefix'=>'admin','middleware'=>'CheckAdminAuth'],function()
 
 	//------Manage User ---------------------------------------------------------------------------
 
-	//------Category Management  ---------------------------------------------------------------------------
+	// //------Category Management  ---------------------------------------------------------------------------
 	Route::get('/category','Admin\CategoryManagement@index');
 	Route::match(['get','post'],'/category/add','Admin\CategoryManagement@add');
 	Route::match(['get','post'],'/category/edit/{id}','Admin\CategoryManagement@edit');
 	Route::match(['get','post'],'/category/delete/{id}','Admin\CategoryManagement@delete');
-	//------Category Management  ---------------------------------------------------------------------------
+	// //------Category Management  ---------------------------------------------------------------------------
 	
     Route::match(['get','post'],'/reset-password','AuthController@reset_password');
     Route::match(['get','post'],'/my-profile','AuthController@my_profile');
@@ -52,8 +52,14 @@ Route::group(['prefix'=>'admin','middleware'=>'CheckAdminAuth'],function()
     Route::match(['get','post'],'/member/edit/{id}','Admin\ActorManagementController@edit');
     Route::match(['get','post'],'/member/delete/{id}','Admin\ActorManagementController@delete');
 
-    //-----------------Actor-----------------------------
+    //-----------------Actor----------------------------
 
+    //----------------Subscription --------------------
+ 	Route::match(['get','post'],'/subscription-list','Admin\SubscriptionController@index');
+    Route::match(['get','post'],'/subscription-list/add','Admin\SubscriptionController@add');
+    Route::match(['get','post'],'/subscription-list/edit/{id}','Admin\SubscriptionController@edit');
+    Route::match(['get','post'],'/subscription-list/delete/{id}','Admin\SubscriptionController@delete');
+    Route::match(['get','post'],'/subscription-list/validate/name','Admin\SubscriptionController@validate_name');
 
     //----------------Subscription --------------------
  	Route::match(['get','post'],'/subscription-list','Admin\SubscriptionController@index');
@@ -72,8 +78,5 @@ Route::group(['prefix'=>'admin','middleware'=>'CheckAdminAuth'],function()
 
     //----------------Movies --------------------
 
-
-    // define('AdminProfileBasePath', 'public/assets/img');
-    // define('AdminProfileImgPath', asset('public/assets/img'));
 
 });

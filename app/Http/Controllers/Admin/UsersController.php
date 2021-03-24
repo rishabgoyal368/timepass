@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
-
 use App\User;
 use Auth;
 
@@ -42,7 +41,7 @@ class UsersController extends Controller
                 $data = $request->all();
                 $validator =  Validator::make($data, [
                     'first_name' =>  'required',
-                    'email' => 'required|email',
+                    'email' => 'required|email|unique:users,email,' . @$data['id'] . ',id',
                     'mobile_number' => 'required|numeric',
                     'status' => 'required',
                     'password' => @$data['id'] ? 'nullable' : 'required|confirmed',
@@ -50,20 +49,19 @@ class UsersController extends Controller
                 if ($validator->fails()) {
                     return redirect()->back()->withInput()->withErrors($validator->errors());
                 }
-                $user = User::where('id', $request['id'])->first();
-                if ($request['id']) {
-                    $data['password'] = $user['password'];
+                $user = User::where('id',$request['id'])->first();
+                if ($request['id']) { 
+                    $data['password'] = $user['password'];                  
                     $msz =  'Updated';
                 } else {
-                    $data['password'] = Hash::make($request['password']);
                     $msz =  'Added';
                 }
+                // return $data;
                 $users =  User::addEdit($data);
                 $msz = $request['id'] ? 'Updated' : 'Added';
                 return redirect('admin/manage-users')->with(['success', 'User ' . $msz . ' Successfully']);
             }
         } catch (\Exception $e) {
-            return $e->getMessage();
             return redirect()->back()->with(['error' => $e->getMessage()]);
         }
     }
