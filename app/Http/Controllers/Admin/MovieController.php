@@ -79,7 +79,7 @@ class MovieController extends Controller
         $crew_member_list 	= Member::where('type','Crew-member')->get()->toArray();
         $director_list 		= Member::where('type','Director')->get()->toArray();
         $label = 'Movie';
-        return view('Admin.Movies.form', compact('label','actor_list','crew_member_list','director_list'));
+        return view('Admin.Movies.form', compact('label','selected_actor_list','selected_director_list','selected_crew_member_list','actor_list','crew_member_list','director_list'));
     }
 
     public function edit(Request $request, $id)

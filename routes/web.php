@@ -78,5 +78,11 @@ Route::group(['prefix'=>'admin','middleware'=>'CheckAdminAuth'],function()
 
     //----------------Movies --------------------
 
+    //---------------Settings--------------------------
+
+    Route::match(['get','post'],'/upload-banner','Admin\SettingController@banner');
+    Route::match(['get','post'],'/app-version','Admin\SettingController@app_version');
+    Route::match(['get','post'],'/payment-key','Admin\SettingController@app_key');
+    //---------------Settings--------------------------
 
 });
