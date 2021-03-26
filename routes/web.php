@@ -60,6 +60,13 @@ Route::group(['prefix'=>'admin','middleware'=>'CheckAdminAuth'],function()
     Route::match(['get','post'],'/subscription-list/edit/{id}','Admin\SubscriptionController@edit');
     Route::match(['get','post'],'/subscription-list/delete/{id}','Admin\SubscriptionController@delete');
     Route::match(['get','post'],'/subscription-list/validate/name','Admin\SubscriptionController@validate_name');
+
+    //----------------Subscription --------------------
+ 	Route::match(['get','post'],'/subscription-list','Admin\SubscriptionController@index');
+    Route::match(['get','post'],'/subscription-list/add','Admin\SubscriptionController@add');
+    Route::match(['get','post'],'/subscription-list/edit/{id}','Admin\SubscriptionController@edit');
+    Route::match(['get','post'],'/subscription-list/delete/{id}','Admin\SubscriptionController@delete');
+    Route::match(['get','post'],'/subscription-list/validate/name','Admin\SubscriptionController@validate_name');
     
     //----------------Subscription --------------------
 
@@ -69,5 +76,13 @@ Route::group(['prefix'=>'admin','middleware'=>'CheckAdminAuth'],function()
  	Route::match(['get','post'],'/movie/edit/{id}','Admin\MovieController@edit');
  	Route::match(['get','post'],'/movie/delete/{id}','Admin\MovieController@delete');
 
+    //----------------Movies --------------------
+
+    //---------------Settings--------------------------
+
+    Route::match(['get','post'],'/upload-banner','Admin\SettingController@banner');
+    Route::match(['get','post'],'/app-version','Admin\SettingController@app_version');
+    Route::match(['get','post'],'/payment-key','Admin\SettingController@app_key');
+    //---------------Settings--------------------------
 
 });

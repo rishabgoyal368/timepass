@@ -19,7 +19,6 @@ class ActorManagementController extends Controller
     {
         if ($request->isMethod('post')) {
             $data                       = $request->all();
-            // dd($data);
             $add_actor                  = new Member;
             $add_actor->first_name      = $data['first_name'];
             $add_actor->last_name       = $data['last_name'];
@@ -45,7 +44,7 @@ class ActorManagementController extends Controller
     {
         if ($request->isMethod('post')) {
             $data                       = $request->all();
-            $add_actor                  = Member::find($request->id);
+            $add_actor                  = Member::find($id);
             $add_actor->first_name      = $data['first_name'];
             $add_actor->last_name       = $data['last_name'];
             $add_actor->address         = $data['address'];
