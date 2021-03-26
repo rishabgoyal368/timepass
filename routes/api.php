@@ -16,6 +16,12 @@ use App\Http\Controllers\ApiController;
 //------------movie-listing-----------------
 Route::get('/movie-list', 'Api\MovieController@index');
 //------------movie-listing-----------------
+
+
+//-----------upcoming-movie-list---------------
+Route::get('/upcomming-movie-list','Api\MovieController@upcomming_list');
+//-----------upcoming-movie-list---------------
+
 //------------subscription--------------------
 Route::get('/subscription-list', 'Api\SubscriptionController@index');
 //------------subscription--------------------

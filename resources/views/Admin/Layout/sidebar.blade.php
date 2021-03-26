@@ -73,15 +73,6 @@
         </ul>
     </li>
 
-    <li class="menu-item">
-        <a href="{{ url('admin/category') }}" class=" menu-link">
-            <span class="menu-label">
-                <span class="menu-name">Category Management</span>
-
-            </span>
-        </a>
-    </li>
-
     <li class="menu-item ">
         <a href="{{ url('admin/movie') }}" class=" menu-link">
             <span class="menu-label">
@@ -100,9 +91,47 @@
         </a>
     </li>
 
-</ul>
+    <li class="menu-item ">
+        <a href="#" class="open-dropdown menu-link">
+            <span class="menu-label">
+                <span class="menu-name">Settings
+                    <span class="menu-arrow"></span>
+                </span>
+            </span>
+        </a>
+        <!--submenu-->
+        <ul class="sub-menu">
+            <li class="menu-item ">
+                <a href="{{ url('admin/upload-banner') }}" class=' menu-link'>
+                    <span class="menu-label">
+                        <span class="menu-name">Upload Banner</span>
+                    </span>
+                    <span class="menu-icon">
+                        <i class="icon-placeholder  mdi mdi-shape-circle-plus "></i>
+                    </span>
+                </a>
+            </li>
+            <li class="menu-item ">
+                <a href="{{ url('admin/app-version') }}" class=' menu-link'>
+                    <span class="menu-label">
+                        <span class="menu-name">App Version</span>
+                    </span>
+                    <span class="menu-icon">
+                        <i class="icon-placeholder  mdi mdi-shape-circle-plus "></i>
+                    </span>
+                </a>
+            </li>
+            <li class="menu-item ">
+                <a href="{{ url('admin/payment-key') }}" class=' menu-link'>
+                    <span class="menu-label">
+                        <span class="menu-name">Payment Key</span>
+                    </span>
+                    <span class="menu-icon">
+                        <i class="icon-placeholder  mdi mdi-shape-circle-plus "></i>
+                    </span>
+                </a>
+            </li>
 
-</li>
-
-
+        </ul>
+    </li>
 </ul>

@@ -190,7 +190,7 @@ class ApiController extends Controller
                 'first_name' => 'required',
                 'last_name'     => 'required',
                 'profile_image'     => 'required',
-                'email'     => 'required',
+                // 'email'     => 'required',
                 'mobile_number' => 'required|numeric'
             ]
         );
@@ -205,7 +205,7 @@ class ApiController extends Controller
         $user =   auth()->userOrFail();
         $user->first_name         = $data['first_name'];
         $user->last_name          = $data['last_name'];
-        $user->email              = $data['email'];
+        // $user->email              = $data['email'];
         $user->mobile_number     = $data['mobile_number'];
         if ($data['profile_image']) {
             $fileName = time() . '.' . $request->profile_image->extension();

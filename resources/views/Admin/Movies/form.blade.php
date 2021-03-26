@@ -1,7 +1,7 @@
 <?php
-if (isset($category_details)) {
+if (isset($movie_data)) {
     $title = 'Edit';
-    $action = url('admin/movie/edit/' . $category_details['id']);
+    $action = url('admin/movie/edit/' . $movie_data['id']);
 } else {
     $title = 'Add';
     $action = url('admin/movie/add');
@@ -20,6 +20,7 @@ if (isset($category_details)) {
         opacity:0;
     }
 </style>
+
 <section class="admin-content">
     <div class="bg-dark">
         <div class="container  m-b-30">
@@ -44,7 +45,7 @@ if (isset($category_details)) {
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputEmail4">Name</label>
-                                    <input type="text" class="form-control" name="name" value="{{ @$category_details['name'] }}" placeholder="Title">
+                                    <input type="text" class="form-control" name="name" value="{{ @$movie_data['name'] }}" placeholder="Title">
                                 </div>
                             </div>
                             <div class="form-row">
@@ -53,7 +54,7 @@ if (isset($category_details)) {
                                     <select class="form-control js-example-basic-multiple" name="actor_name[]" multiple>
                                         <option  disabled>Select</option>
                                         @foreach($actor_list as $actor)
-                                            <option value="{{ $actor['id'] }}">{{ ucfirst($actor['first_name'])  }} {{ $actor['last_name'] }}</option>
+                                            <option value="{{ $actor['id'] }}"   @if(in_array($actor['id'], $selected_actor_list))selected @endif >{{ ucfirst($actor['first_name'])  }} {{ $actor['last_name'] }}</option>
                                         @endforeach
                                     </select>
                                     <label id="actor_name[]-error" class="error" for="actor_name[]"></label>
@@ -65,7 +66,7 @@ if (isset($category_details)) {
                                     <select class="form-control js-example-basic-multiple" name="director[]" multiple>
                                         <option  disabled>Select</option>
                                         @foreach($director_list as $director)
-                                            <option value="{{ $director['id'] }}">{{ ucfirst($director['first_name'])  }} {{ $director['last_name'] }}</option>
+                                            <option value="{{ $director['id'] }}"  @if(in_array($director['id'], $selected_director_list))selected @endif >{{ ucfirst($director['first_name'])  }} {{ $director['last_name'] }}</option>
                                         @endforeach
                                     </select>
                                     <label id="director[]-error" class="error" for="director[]"></label>
@@ -77,7 +78,7 @@ if (isset($category_details)) {
                                     <select class="form-control js-example-basic-multiple" name="crew_member[]" multiple>
                                         <option  disabled>Select</option>
                                         @foreach($crew_member_list as $crew)
-                                            <option value="{{ $crew['id'] }}">{{ ucfirst($crew['first_name'])  }} {{ $crew['last_name'] }}</option>
+                                            <option value="{{ $crew['id'] }}"  @if(in_array($crew['id'], $selected_crew_member_list))selected @endif >{{ ucfirst($crew['first_name'])  }} {{ $crew['last_name'] }}</option>
                                         @endforeach
                                     </select>
                                     <label id="crew_member[]-error" class="error" for="crew_member[]"></label>
@@ -85,24 +86,48 @@ if (isset($category_details)) {
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
+                                    <label for="inputEmail4">Release Date</label>
+                                    <input type="date"  class="form-control"  name="release_date" value="{{ @$movie_data['release_date'] }}">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
                                     <label for="inputEmail4">Tag</label>
-                                    <input type="text" class="form-control" name="tag" value="{{ @$category_details['tag'] }}" placeholder="Tag">
+                                    <input type="text" id="tags-input" data-role="tagsinput" class="form-control"  name="tag" value="{{ @$movie_data['tag'] }}" placeholder="Tag">
                                 </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label for="inputEmail4">Description</label>
-                                    <textarea class="form-control" rows="6" cols="6" name="description" placeholder="Description">{{ @$category_details['description'] }}</textarea>
+                                    <textarea class="form-control" rows="6" cols="6" name="description" placeholder="Description">{{ @$movie_data['description'] }}</textarea>
+                                </div>
+                            </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputEmail4">Category</label>
+                                    <select name="category" class="form-control">
+                                        <option disabled selected>Select</option>
+                                        <option value="web_series" <?php if(@$movie_data['category'] == 'web_series'){ echo "selected";} ?>>Web Series</option>
+                                        <option value="movie" <?php if(@$movie_data['movie'] == 'web_series'){ echo "selected";} ?>>Movie</option>
+                                    </select>
                                 </div>
                             </div>
                             <div class="form-row">
                                 <label>Media:</label>
                                 <div class="col-sm-7">
+                                    @if(@$movie_data['video'])
+                                        <input type="file" name="video" id="img_upload"  class="img_cls " accept="video/*">
+                                        {{ @$movie_data['video'] }}
+                                    @else
+                                        <input type="file" name="video" id="img_upload"  class="img_cls " accept="video/*" required>
+                                    @endif
+
                                 
-                                <div>
-                                    <video src="" id="old_image" width="360px" height="240px" alt="No video" class="page_mngt_video" controls></video>
-                                </div>
-                                <div>
+                                <!-- <div> -->
+                                 <!--    <video src="{{ @$movie_data['video'] }}" id="old_image" width="360px" height="240px" alt="No video" class="page_mngt_video" controls></video> -->
+                                <!-- </div> -->
+                                <!-- <div>
                                     <label for="img_upload" generated="true" class="error"></label>
                                     <div class="Upload-img mt-3" style="padding: 30px;">
                                         <span class="uploader">
@@ -112,8 +137,19 @@ if (isset($category_details)) {
                                             </span>
                                         </span>
                                     </div>
-                                     <label for="img_upload" generated="true" class="error"></label>
+                                </div> -->
                                 </div>
+                            </div>
+                            <br>
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="inputEmail4">Thumbnail</label>
+                                    @if(@$movie_data['thumbnail'])
+                                        <input type="file"  name="thumbnail" accept="image/*">
+                                        {{ @$movie_data['thumbnail'] }}
+                                    @else
+                                        <input type="file"  name="thumbnail" accept="image/*" required>
+                                    @endif
                                 </div>
                             </div>
 
@@ -131,6 +167,12 @@ if (isset($category_details)) {
 
     </div>
 </section>
+
+
+
+<!-- <script type="text/javascript">
+    $("#tags_input").tagsinput('items')   
+</script> -->
 <script type="text/javascript">
     $('#category_form').validate({
         rules: {
@@ -153,12 +195,15 @@ if (isset($category_details)) {
                 minlength:5,
                 maxlength:50,
             },
+            category: {
+                required: true,
+            },
             description: {
                 required: true,
                 minlength:5,
                 maxlength:1000,
             },
-            video:{
+            release_date:{
                 required:true,
             },
         },
@@ -169,7 +214,7 @@ if (isset($category_details)) {
         $('.js-example-basic-multiple').select2();
     });
 </script>
-<script type="text/javascript">
+<!-- <script type="text/javascript">
     $(document).ready(function(){
         function readURL(input)
         {
@@ -208,5 +253,5 @@ if (isset($category_details)) {
             }
         });
     });
-</script>
+</script> -->
 @endsection
