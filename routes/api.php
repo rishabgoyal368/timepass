@@ -17,6 +17,9 @@ use App\Http\Controllers\ApiController;
 Route::get('/movie-list', 'Api\MovieController@index');
 //------------movie-listing-----------------
 
+//------------trending-movie-listing-----------------
+Route::get('/trending-movie-list', 'Api\MovieController@trending_movie_list');
+//------------trending-movie-listing-----------------
 
 //-----------upcoming-movie-list---------------
 Route::get('/upcomming-movie-list','Api\MovieController@upcomming_list');
