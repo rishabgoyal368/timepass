@@ -109,7 +109,7 @@ if (isset($movie_data)) {
                                     <select name="category" class="form-control">
                                         <option disabled selected>Select</option>
                                         <option value="web_series" <?php if(@$movie_data['category'] == 'web_series'){ echo "selected";} ?>>Web Series</option>
-                                        <option value="movie" <?php if(@$movie_data['movie'] == 'web_series'){ echo "selected";} ?>>Movie</option>
+                                        <option value="movie" <?php if(@$movie_data['category'] == 'movie'){ echo "selected";} ?>>Movie</option>
                                     </select>
                                 </div>
                             </div>

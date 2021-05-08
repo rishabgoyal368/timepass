@@ -87,6 +87,7 @@ class MovieController extends Controller
         if ($request->isMethod('post')) {
             $data                       = $request->all();
             // dd($data);
+            // return $request;
             $edit_movie                  = Movie::find($id);
             $edit_movie->name            = $data['name'];
             $edit_movie->tag             = $data['tag'];
@@ -96,13 +97,13 @@ class MovieController extends Controller
             if ($request->video) {
                 $fileName = time() . '.' . $request->video->extension();
                 $request->video->move(public_path('uploads/movie/video'), $fileName);
-                $video_url = url('=/uploads/movie/video'); 
+                $video_url = url('/uploads/movie/video'); 
                 $edit_movie->video  =    $video_url.'/'.$fileName;
             }
             if ($request->thumbnail) {
                 $fileName = time() . '.' . $request->thumbnail->extension();
                 $request->thumbnail->move(public_path('uploads/movie/thumbnail'), $fileName);
-                $thumbnail_url = url('=/uploads/movie/thumbnail'); 
+                $thumbnail_url = url('/uploads/movie/thumbnail'); 
                 $edit_movie->thumbnail  =    $thumbnail_url.'/'.$fileName;
             }
             if ($edit_movie->save()) {
