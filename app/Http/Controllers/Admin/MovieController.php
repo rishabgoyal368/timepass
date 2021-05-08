@@ -29,13 +29,13 @@ class MovieController extends Controller
             if ($request->video) {
                 $fileName = time() . '.' . $request->video->extension();
                 $request->video->move(public_path('uploads/movie/video'), $fileName);
-                $video_url = url('public/uploads/movie/video'); 
+                $video_url = url('/uploads/movie/video'); 
                 $add_movie->video  =    $video_url.'/'.$fileName;
             }
             if ($request->thumbnail) {
                 $fileName = time() . '.' . $request->thumbnail->extension();
                 $request->thumbnail->move(public_path('uploads/movie/thumbnail'), $fileName);
-                $thumbnail_url = url('public/uploads/movie/thumbnail'); 
+                $thumbnail_url = url('/uploads/movie/thumbnail'); 
                 $add_movie->thumbnail  =    $thumbnail_url.'/'.$fileName;
             }
             if ($add_movie->save()) {
