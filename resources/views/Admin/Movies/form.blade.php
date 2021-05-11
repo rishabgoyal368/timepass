@@ -110,6 +110,9 @@ if (isset($movie_data)) {
                                         <option disabled selected>Select</option>
                                         <option value="web_series" <?php if(@$movie_data['category'] == 'web_series'){ echo "selected";} ?>>Web Series</option>
                                         <option value="movie" <?php if(@$movie_data['category'] == 'movie'){ echo "selected";} ?>>Movie</option>
+                                        <option value="serial" <?php if(@$movie_data['category'] == 'serial'){ echo "selected";} ?>>Serial</option>
+                                        <option value="documentary" <?php if(@$movie_data['documentary'] == 'movie'){ echo "selected";} ?>>Documentary</option>
+                                        <option value="chilling" <?php if(@$movie_data['category'] == 'chilling'){ echo "selected";} ?>>Chilling</option>
                                     </select>
                                 </div>
                             </div>
