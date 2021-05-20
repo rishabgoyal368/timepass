@@ -22,7 +22,7 @@ class MovieController extends Controller
             // dd($data);
             $add_movie                  = new Movie;
             $add_movie->name      		= $data['name'];
-            $add_movie->tag       		= $data['tag'];
+            $add_movie->tag       		= serialize($data['tag']);
             $add_movie->description     = $data['description'];
             $add_movie->category        = $data['category'];
             $add_movie->release_date    = date('Y-m-d',strtotime($data['release_date']));
@@ -90,7 +90,9 @@ class MovieController extends Controller
             // return $request;
             $edit_movie                  = Movie::find($id);
             $edit_movie->name            = $data['name'];
-            $edit_movie->tag             = $data['tag'];
+            if(!empty($data['tag'])){
+                $edit_movie->tag             = serialize($data['tag']);
+            }
             $edit_movie->description     = $data['description'];
             $edit_movie->category        = $data['category'];
             $edit_movie->release_date    = date('Y-m-d',strtotime($data['release_date']));

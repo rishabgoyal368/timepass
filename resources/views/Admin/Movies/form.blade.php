@@ -88,7 +88,14 @@ if (isset($movie_data)) {
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputEmail4">Tag</label>
-                                    <input type="text" id="tags-input" data-role="tagsinput" class="form-control" name="tag" value="{{ @$movie_data['tag'] }}" placeholder="Tag">
+                                    <?php 
+                                        $movie_data_tags = [];
+                                        $movie_data_tags = unserialize(@$movie_data['tag']);
+                                    
+                                    ?>
+                                    <select name="tag[]" class="form-control mul_category" multiple="multiple">
+                                      
+                                    </select>
                                 </div>
                             </div>
                             
@@ -105,7 +112,7 @@ if (isset($movie_data)) {
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputEmail4">Time duration of video</label>
-                                    <input type="text"  class="form-control" name="time_duration" value="{{ @$movie_data['tag'] }}" placeholder="Time duration of video">
+                                    <input type="text"  class="form-control" name="time_duration" value="" placeholder="Time duration of video">
                                 </div>
                             </div>
                             
@@ -133,7 +140,7 @@ if (isset($movie_data)) {
                                 </div>
                                 <div class="form-group col-md-6">
                                     <label for="inputEmail4">Trailer URL</label>
-                                    <input type="url"  class="form-control" name="trailor_url" value="{{ @$movie_data['tag'] }}" placeholder="Trailer URL">
+                                    <input type="url"  class="form-control" name="trailor_url" value="" placeholder="Trailer URL">
                                 </div>
                             </div>
                             <div class="form-row">
@@ -183,11 +190,16 @@ if (isset($movie_data)) {
     </div>
 </section>
 
+<link rel="stylesheet" type="text/css" href="{{ url('assets/css/select2.min.css') }}" >
 
-
-<!-- <script type="text/javascript">
-    $("#tags_input").tagsinput('items')   
-</script> -->
+<script type="text/javascript" src='{{ url("assets/js/select2.min.js") }}'></script>
+<script type="text/javascript">
+    $(document).ready(function() {
+        $(".mul_category").select2({
+            tags:true
+        });
+    });
+</script>
 <script type="text/javascript">
     $('#category_form').validate({
         rules: {
@@ -205,11 +217,9 @@ if (isset($movie_data)) {
             "crew_member[]": {
                 required: true,
             },
-            tag: {
-                required: true,
-                minlength: 5,
-                maxlength: 50,
-            },
+            // "tag[]": {
+            //     required: true,
+            // },
             category: {
                 required: true,
             },
