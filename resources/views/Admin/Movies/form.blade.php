@@ -91,11 +91,17 @@ if (isset($movie_data)) {
                                     <?php 
                                         $movie_data_tags = [];
                                         $movie_data_tags = unserialize(@$movie_data['tag']);
+                                        // dd($movie_data_tags);
                                     
                                     ?>
                                     <select name="tag[]" class="form-control mul_category" multiple="multiple">
-                                      
+                                        @if(@$movie_data['tag']))
+                                            @foreach($movie_data_tags as $value)
+                                                <option value="{{ $value}}" selected="selected">{{ $value }}</option>
+                                            @endforeach
+                                        @endif
                                     </select>
+                                    <label id="tag[]-error" class="error" for="tag[]"></label>
                                 </div>
                             </div>
                             
@@ -149,6 +155,13 @@ if (isset($movie_data)) {
                                     <textarea class="form-control" rows="6" cols="6" name="description" placeholder="Description">{{ @$movie_data['description'] }}</textarea>
                                 </div>
                             </div>
+                            <div class="form-row">
+                                <div class="form-group col-md-12">
+                                    <label for="inputEmail4">Popularity Name</label>
+                                    <input class="form-control" name="popularity_name" placeholder="Popularity Name" value="{{ @$movie_data['popularity_name'] }}">
+                                </div>
+                            </div>
+
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <label>Media:</label>
@@ -217,9 +230,12 @@ if (isset($movie_data)) {
             "crew_member[]": {
                 required: true,
             },
-            // "tag[]": {
-            //     required: true,
-            // },
+            "tag[]": {
+                required: true,
+            },
+            popularity_name:{
+                required:true,
+            },
             category: {
                 required: true,
             },

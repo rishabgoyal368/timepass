@@ -7,7 +7,11 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use App\Http\Controllers\Controller;
 
+use App\Member;
+use App\Subscription;
 use App\Admin;
+use App\Movie;
+use App\User;
 use Auth;
 
 class AdminController extends Controller
@@ -18,7 +22,12 @@ class AdminController extends Controller
     }
     public function index(Request $request)
     {
-        return view('Admin.index');
+        $no_of_users    = User::whereNull('deleted_at')->count();
+        $no_of_movies   = Movie::count();
+        $no_of_packages = Subscription::count();
+        $no_of_members  = Member::count();
+        
+        return view('Admin.index',compact('no_of_users','no_of_movies','no_of_packages','no_of_members'));
     }
     //----------------------------------update adminprofile------------------------------------------
 

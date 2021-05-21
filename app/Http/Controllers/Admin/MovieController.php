@@ -24,6 +24,7 @@ class MovieController extends Controller
             $add_movie->name      		= $data['name'];
             $add_movie->tag       		= serialize($data['tag']);
             $add_movie->description     = $data['description'];
+            $add_movie->popularity_name = $data['popularity_name'];
             $add_movie->category        = $data['category'];
             $add_movie->release_date    = date('Y-m-d',strtotime($data['release_date']));
             if ($request->video) {
@@ -86,13 +87,11 @@ class MovieController extends Controller
     {
         if ($request->isMethod('post')) {
             $data                       = $request->all();
-            // dd($data);
-            // return $request;
+        
             $edit_movie                  = Movie::find($id);
             $edit_movie->name            = $data['name'];
-            if(!empty($data['tag'])){
-                $edit_movie->tag             = serialize($data['tag']);
-            }
+            $edit_movie->tag             = serialize($data['tag']);
+            $edit_movie->popularity_name = $data['popularity_name'];
             $edit_movie->description     = $data['description'];
             $edit_movie->category        = $data['category'];
             $edit_movie->release_date    = date('Y-m-d',strtotime($data['release_date']));

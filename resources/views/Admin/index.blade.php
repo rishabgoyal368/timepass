@@ -4,18 +4,20 @@
 <section class="admin-content">
         <div class="container-fluid bg-dark m-b-30">
             <div class="row">
-
                 <div class="col-12 text-white p-t-40 p-b-90">
+                    <h4><span class="js-greeting"></span>,
+                        <?php
+                            $admin_name = Auth::guard('admin')->user()->user_name;
 
-                    <h4 class="  "><span class="btn btn-white-translucent"><i
-                                    class="mdi mdi-shape-circle-plus "></i></span> <span class="js-greeting"></span>,
-                        Deepak!</h4>
+                        ?>
+                        {{ ucfirst($admin_name) }}
+                        </h4>
                     <p class="opacity-75 ">
                         Lorem ipsum dolor sit amet, consectetur adipisicing elit. Ad corporis dolores <br> doloribus
                         esse et iste laboriosam maiores maxime, mollitia nisi numquam omnis praesentium provident quam
                         quasi quia quisquam recusandae vel.
                     </p>
-                    <a href="#" class="btn btn-white-translucent">View Reports</a>
+                    <!-- <a href="#" class="btn btn-white-translucent">View Reports</a> -->
 
                 </div>
             </div>
@@ -27,19 +29,16 @@
                         <div class="   text-center card-body">
                             <div class="text-success   ">
                                 <div class="avatar avatar-sm ">
-                                    <span class="avatar-title rounded-circle badge-soft-success"><i
-                                                class="mdi mdi-arrow-up-bold mdi-18px"></i> </span>
-
+                                    <span class="avatar-title rounded-circle badge-soft-success">
+                                        <i class="fa fa-users" aria-hidden="true"></i>
+                                    </span>
                                 </div>
-                                <h6 class="m-t-5 m-b-0"> 19%</h6>
                             </div>
-
-
-                            <div class=" text-center">
-                                <h3>$199,580 </h3>
+                            <div class=" text-center"><br>
+                                <h3>{{ $no_of_users }} </h3>
                             </div>
                             <div class="text-overline ">
-                                CURRENT FISCAL
+                                Total Users
                             </div>
                         </div>
                     </div>
@@ -49,19 +48,16 @@
                         <div class="   text-center card-body">
                             <div class="text-danger   ">
                                 <div class="avatar avatar-sm ">
-                                    <span class="avatar-title rounded-circle badge-soft-danger"><i
-                                                class="mdi mdi-arrow-down-bold mdi-18px"></i> </span>
-
+                                    <span class="avatar-title rounded-circle badge-soft-danger">
+                                        <i class="fa fa-film" aria-hidden="true"></i>
+                                    </span>
                                 </div>
-                                <h6 class="m-t-5 m-b-0"> 32%</h6>
                             </div>
-
-
-                            <div class=" text-center">
-                                <h3>$65,055 </h3>
+                            <div class=" text-center"><br>
+                                <h3>{{ $no_of_movies }}</h3>
                             </div>
                             <div class="text-overline ">
-                                Returning AVG
+                                Total Movies
                             </div>
                         </div>
                     </div>
@@ -71,19 +67,16 @@
                         <div class="   text-center card-body">
                             <div class="text-warning   ">
                                 <div class="avatar avatar-sm ">
-                                    <span class="avatar-title rounded-circle badge-soft-warning"><i
-                                                class="mdi mdi-arrange-send-to-back mdi-18px"></i> </span>
-
+                                    <span class="avatar-title rounded-circle badge-soft-warning">
+                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                    </span>
                                 </div>
-                                <h6 class="m-t-5 m-b-0"> 74%</h6>
                             </div>
-
-
-                            <div class=" text-center">
-                                <h3> 35 </h3>
+                            <div class=" text-center"><br>
+                                <h3> {{ $no_of_members }} </h3>
                             </div>
                             <div class="text-overline ">
-                                on-going Projects
+                                Total Movie Members
                             </div>
                         </div>
                     </div>
@@ -93,24 +86,21 @@
                         <div class="   text-center card-body">
                             <div class="text-info   ">
                                 <div class="avatar avatar-sm ">
-                                    <span class="avatar-title rounded-circle badge-soft-info"><i
-                                                class="mdi mdi-account-convert mdi-18px"></i> </span>
-
+                                    <span class="avatar-title rounded-circle badge-soft-info">
+                                        <i class="fa fa-ticket" aria-hidden="true"></i>
+                                    </span>
                                 </div>
-                                <h6 class="m-t-5 m-b-0"> 36%</h6>
                             </div>
-
-
-                            <div class=" text-center">
-                                <h3>$899,580 </h3>
+                            <div class=" text-center"><br>
+                                <h3>{{ $no_of_packages }} </h3>
                             </div>
                             <div class="text-overline ">
-                                Recurring bills
+                                Total Subscription Packages
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col d-lg-block d-none m-b-30">
+<!--                 <div class="col d-lg-block d-none m-b-30">
                     <div class="card ">
                         <div class="   text-center card-body">
                             <div class="text-danger   ">
@@ -153,7 +143,7 @@
                             </div>
                         </div>
                     </div>
-                </div>
+                </div> -->
 
             </div>
 
